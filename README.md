@@ -7,7 +7,6 @@ You can use App Mesh with [AWS Fargate](https://aws.amazon.com/fargate), [Amazon
 
 For help getting started with App Mesh, head to https://aws.amazon.com/app-mesh.  Or, to see examples, you can visit our examples repository: https://github.com/aws/aws-app-mesh-examples
 
-# Experimental Public Roadmap - AWS App Mesh
 ---
 
 ## Introduction
