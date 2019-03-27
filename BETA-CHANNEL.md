@@ -35,4 +35,4 @@ Due to the desire of getting features in the hands of customers early for feedba
 
 ## When will the Beta Channel be available?
 
-April 29th, 2019
+Coming soon.  Details will be posted here as they become availabl
