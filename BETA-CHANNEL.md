@@ -35,4 +35,4 @@ Due to the desire of getting features in the hands of customers early for feedba
 
 ## When will the Beta Channel be available?
 
-Coming soon.  Details will be posted here as they become availabl
+Coming soon.  Details will be posted here as they become available.
