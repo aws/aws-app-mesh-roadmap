@@ -17,6 +17,11 @@ Knowing about our upcoming products and priorities helps our customers plan. Thi
 
 [See the roadmap »](https://github.com/aws/aws-app-mesh-roadmap/projects/1)
 
+## Beta Channel
+The App Mesh team recently announced the upcoming availability of a Beta Channel, a new public service endpoint which allows every customer to try out and provide feedback on new service features before they are generally available. This new service endpoint will be separate from the standard production endpoint, and will be coupled with preview releases of the AWS CLI for App Mesh, allowing customers to test new features without impacting their current production infrastructure.
+
+For more information on the Beta Channel, see [AWS App Mesh Beta Channel](/BETA-CHANNEL.md).
+
 
 ## FAQs
 **Q: Why did you build this?**
