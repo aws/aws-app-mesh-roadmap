@@ -3,7 +3,7 @@ name: 'Issue: Community Request'
 about: Suggest an idea for the roadmap! The team will review. If this doesn’t look
   right, choose a different type.
 title: "[request]: describe request here"
-labels: ''
+labels: Proposed
 assignees: ''
 
 ---
