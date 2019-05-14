@@ -20,6 +20,10 @@ The App Mesh team recently announced the upcoming availability of a Beta Channel
 
 For more information on the Beta Channel, see [AWS App Mesh Beta Channel](/BETA-CHANNEL.md).
 
+## Security disclosures
+
+If you think you’ve found a potential security issue, please do not post it in the Issues.  Instead, please follow the instructions [here](https://aws.amazon.com/security/vulnerability-reporting/) or [email AWS security directly](mailto:aws-security@amazon.com).
+
 
 ## FAQs
 **Q: Why did you build this?**
