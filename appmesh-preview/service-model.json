@@ -1143,6 +1143,14 @@
       },
       "documentation": ""
     },
+    "TcpRetryPolicyEvents": {
+      "type": "list",
+      "member": {
+        "shape": "TcpRetryPolicyEvent"
+      },
+      "min": 1,
+      "max": 1
+    },
     "CreateVirtualServiceInput": {
       "type": "structure",
       "required": [
@@ -1826,6 +1834,11 @@
         }
       }
     },
+    "HttpRetryPolicyEvent": {
+      "type": "string",
+      "min": 1,
+      "max": 25
+    },
     "DescribeVirtualServiceOutput": {
       "type": "structure",
       "required": [
@@ -2088,6 +2101,12 @@
       },
       "documentation": "<p>An object representing the AWS Cloud Map attribute information for your virtual node.</p>"
     },
+    "TcpRetryPolicyEvent": {
+      "type": "string",
+      "enum": [
+        "connection-error"
+      ]
+    },
     "VirtualServiceSpec": {
       "type": "structure",
       "members": {
@@ -2265,6 +2284,13 @@
       },
       "documentation": ""
     },
+    "DurationUnit": {
+      "type": "string",
+      "enum": [
+        "ms",
+        "s"
+      ]
+    },
     "RoutePriority": {
       "type": "integer",
       "box": true,
@@ -2424,6 +2450,14 @@
       },
       "documentation": "<p>An object representing the status of a virtual service.</p>"
     },
+    "HttpRetryPolicyEvents": {
+      "type": "list",
+      "member": {
+        "shape": "HttpRetryPolicyEvent"
+      },
+      "min": 1,
+      "max": 25
+    },
     "ListVirtualNodesLimit": {
       "type": "integer",
       "box": true,
@@ -2536,16 +2570,27 @@
     "HttpMethod": {
       "type": "string",
       "enum": [
-        "connect",
-        "delete",
-        "get",
-        "head",
-        "options",
-        "patch",
-        "post",
-        "put",
-        "trace"
+        "CONNECT",
+        "DELETE",
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "PATCH",
+        "POST",
+        "PUT",
+        "TRACE"
       ]
+    },
+    "Duration": {
+      "type": "structure",
+      "members": {
+        "unit": {
+          "shape": "DurationUnit"
+        },
+        "value": {
+          "shape": "DurationValue"
+        }
+      }
     },
     "ConflictException": {
       "type": "structure",
@@ -2638,6 +2683,11 @@
         }
       },
       "documentation": "<p>An object representing a service mesh returned by a list operation.</p>"
+    },
+    "MaxRetries": {
+      "type": "long",
+      "box": true,
+      "min": 0
     },
     "MeshStatusCode": {
       "type": "string",
@@ -2969,6 +3019,23 @@
       "min": 0,
       "max": 50
     },
+    "HttpRetryPolicy": {
+      "type": "structure",
+      "members": {
+        "httpRetryEvents": {
+          "shape": "HttpRetryPolicyEvents"
+        },
+        "maxRetries": {
+          "shape": "MaxRetries"
+        },
+        "perRetryTimeout": {
+          "shape": "Duration"
+        },
+        "tcpRetryEvents": {
+          "shape": "TcpRetryPolicyEvents"
+        }
+      }
+    },
     "DescribeVirtualRouterInput": {
       "type": "structure",
       "required": [
@@ -3072,6 +3139,11 @@
         "ALLOW_ALL",
         "DROP_ALL"
       ]
+    },
+    "DurationValue": {
+      "type": "long",
+      "box": true,
+      "min": 0
     },
     "Hostname": {
       "type": "string"
@@ -3347,6 +3419,9 @@
         "match": {
           "shape": "HttpRouteMatch",
           "documentation": "<p>The criteria for determining an HTTP request match.</p>"
+        },
+        "retryPolicy": {
+          "shape": "HttpRetryPolicy"
         }
       },
       "documentation": "<p>An object representing the HTTP routing specification for a route.</p>"
