@@ -1128,21 +1128,6 @@
       },
       "documentation": ""
     },
-    "ListenerTls": {
-      "type": "structure",
-      "required": [
-        "certificate",
-        "mode"
-      ],
-      "members": {
-        "certificate": {
-          "shape": "ListenerTlsCertificate"
-        },
-        "mode": {
-          "shape": "ListenerTlsMode"
-        }
-      }
-    },
     "DeleteMeshInput": {
       "type": "structure",
       "required": [
@@ -1624,14 +1609,6 @@
       "type": "integer",
       "min": 0,
       "max": 100
-    },
-    "ListenerTlsMode": {
-      "type": "string",
-      "enum": [
-        "DISABLED",
-        "PERMISSIVE",
-        "STRICT"
-      ]
     },
     "TagValue": {
       "type": "string",
@@ -2481,14 +2458,6 @@
       "min": 1,
       "max": 25
     },
-    "ListenerTlsCertificate": {
-      "type": "structure",
-      "members": {
-        "acm": {
-          "shape": "ListenerTlsAcmCertificate"
-        }
-      }
-    },
     "ListVirtualNodesLimit": {
       "type": "integer",
       "box": true,
@@ -2917,9 +2886,6 @@
         "portMapping": {
           "shape": "PortMapping",
           "documentation": "<p>The port mapping information for the listener.</p>"
-        },
-        "tls": {
-          "shape": "ListenerTls"
         }
       },
       "documentation": "<p>An object representing a listener for a virtual node.</p>"
@@ -3634,17 +3600,6 @@
       "box": true,
       "min": 1,
       "max": 50
-    },
-    "ListenerTlsAcmCertificate": {
-      "type": "structure",
-      "required": [
-        "certificateArn"
-      ],
-      "members": {
-        "certificateArn": {
-          "shape": "Arn"
-        }
-      }
     },
     "TagKey": {
       "type": "string",
