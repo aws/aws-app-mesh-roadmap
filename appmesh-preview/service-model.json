@@ -1847,15 +1847,19 @@
       ],
       "members": {
         "invert": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>Specify <code>True</code> to match the opposite of the <code>HeaderMatchMethod</code> method and value. The default value is <code>False</code>.</p>"
         },
         "match": {
-          "shape": "HeaderMatchMethod"
+          "shape": "HeaderMatchMethod",
+          "documentation": "<p>The <code>HeaderMatchMethod</code> object.</p>"
         },
         "name": {
-          "shape": "HeaderName"
+          "shape": "HeaderName",
+          "documentation": "<p>A name for the HTTP header in the client request that will be matched on.</p>"
         }
-      }
+      },
+      "documentation": "<p>An object representing the HTTP header in the request.</p>"
     },
     "HttpRetryPolicyEvent": {
       "type": "string",
@@ -2158,12 +2162,15 @@
       ],
       "members": {
         "end": {
-          "shape": "Long"
+          "shape": "Long",
+          "documentation": "<p>The end of the range.</p>"
         },
         "start": {
-          "shape": "Long"
+          "shape": "Long",
+          "documentation": "<p>The start of the range.</p>"
         }
-      }
+      },
+      "documentation": "<p>The range of values to match on. The first character of the range is included in the range, though the last character is not. For example, if the range specified were 1-100, only values 1-99 would be matched.</p>"
     },
     "ListVirtualRoutersLimit": {
       "type": "integer",
@@ -2659,17 +2666,20 @@
       ],
       "members": {
         "headers": {
-          "shape": "HttpRouteHeaders"
+          "shape": "HttpRouteHeaders",
+          "documentation": "<p>The client request headers to match on.</p>"
         },
         "method": {
-          "shape": "HttpMethod"
+          "shape": "HttpMethod",
+          "documentation": "<p>The client request header method to match on.</p>"
         },
         "prefix": {
           "shape": "String",
           "documentation": "<p>Specifies the path to match requests with. This parameter must always start with\n            <code>/</code>, which by itself matches all requests to the virtual service name. You\n         can also match for path-based routing of requests. For example, if your virtual service\n         name is <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>"
         },
         "scheme": {
-          "shape": "HttpScheme"
+          "shape": "HttpScheme",
+          "documentation": "<p>The client request header scheme to match on.</p>"
         }
       },
       "documentation": "<p>An object representing the requirements for a route to match HTTP requests for a virtual\n         router.</p>"
@@ -2919,7 +2929,10 @@
           "documentation": "<p>The port mapping information for the listener.</p>"
         },
         "tls": {
-          "shape": "ListenerTls"
+          "shape": "ListenerTls",
+          "tags": [
+            "preview"
+          ]
         }
       },
       "documentation": "<p>An object representing a listener for a virtual node.</p>"
@@ -3055,6 +3068,10 @@
     },
     "HttpRetryPolicy": {
       "type": "structure",
+      "required": [
+        "maxRetries",
+        "perRetryTimeout"
+      ],
       "members": {
         "httpRetryEvents": {
           "shape": "HttpRetryPolicyEvents"
@@ -3137,21 +3154,27 @@
       "type": "structure",
       "members": {
         "exact": {
-          "shape": "HeaderMatch"
+          "shape": "HeaderMatch",
+          "documentation": "<p>The header value sent by the client must match the specified value exactly.</p>"
         },
         "prefix": {
-          "shape": "HeaderMatch"
+          "shape": "HeaderMatch",
+          "documentation": "<p>The header value sent by the client must begin with the specified characters.</p>"
         },
         "range": {
-          "shape": "MatchRange"
+          "shape": "MatchRange",
+          "documentation": "<p>The object that specifies the range of numbers that the header value sent by the client must be included in.</p>"
         },
         "regex": {
-          "shape": "HeaderMatch"
+          "shape": "HeaderMatch",
+          "documentation": "<p>The header value sent by the client must include the specified characters.</p>"
         },
         "suffix": {
-          "shape": "HeaderMatch"
+          "shape": "HeaderMatch",
+          "documentation": "<p>The header value sent by the client must end with the specified characters.</p>"
         }
-      }
+      },
+      "documentation": "<p>An object representing the method and value to match the header value sent with a request. Specify one match method.</p>"
     },
     "DeleteMeshOutput": {
       "type": "structure",
@@ -3430,7 +3453,8 @@
           "documentation": "<p>The HTTP routing information for the route.</p>"
         },
         "priority": {
-          "shape": "RoutePriority"
+          "shape": "RoutePriority",
+          "documentation": "<p>The priority for the route. Routes are matched based on the specified value, where 0 is the highest priority.</p>"
         },
         "tcpRoute": {
           "shape": "TcpRoute",
@@ -3455,7 +3479,10 @@
           "documentation": "<p>The criteria for determining an HTTP request match.</p>"
         },
         "retryPolicy": {
-          "shape": "HttpRetryPolicy"
+          "shape": "HttpRetryPolicy",
+          "tags": [
+            "preview"
+          ]
         }
       },
       "documentation": "<p>An object representing the HTTP routing specification for a route.</p>"
