@@ -1,8 +1,7 @@
 ---
-name: 'Issue: Community Request'
-about: Suggest an idea for the roadmap! The team will review. If this doesn’t look
-  right, choose a different type.
-title: "[request]: describe request here"
+name: 'Feature Request'
+about: Suggest an idea for the roadmap!
+title: "Feature Request: describe request here"
 labels: Proposed
 assignees: ''
 
@@ -18,7 +17,7 @@ This could be Fargate, ECS, EKS, EC2, Kubernetes, something else.
 What outcome are you trying to achieve, ultimately, and why is it hard/impossible to do right now? What is the impact of not having this problem solved? The more details you can provide, the better we'll be able to understand and solve the problem.
 
 **Are you currently working around this issue?**
-How are you currently solving this problem? 
+How are you currently solving this problem?
 
 **Additional context**
 Anything else we should know?
