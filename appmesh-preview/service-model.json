@@ -1005,6 +1005,14 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
+        },
         "spec": {
           "shape": "VirtualNodeSpec",
           "documentation": "<p>The new virtual node specification to apply. This overwrites the existing data.</p>"
@@ -1075,6 +1083,14 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
+        },
         "spec": {
           "shape": "VirtualServiceSpec",
           "documentation": "<p>The virtual service specification to apply.</p>"
@@ -1112,6 +1128,14 @@
           "documentation": "<p>The name of the service mesh that the virtual router resides in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
         },
         "spec": {
           "shape": "VirtualRouterSpec",
@@ -1248,6 +1272,14 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
+        },
         "virtualRouterName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the virtual router to delete.</p>",
@@ -1295,6 +1327,14 @@
           "documentation": "<p>The name of the service mesh that the route resides in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
         },
         "routeName": {
           "shape": "ResourceName",
@@ -1346,6 +1386,8 @@
         "arn",
         "createdAt",
         "lastUpdatedAt",
+        "meshOwner",
+        "resourceOwner",
         "uid",
         "version"
       ],
@@ -1361,6 +1403,18 @@
         "lastUpdatedAt": {
           "shape": "Timestamp",
           "documentation": "<p>The Unix epoch timestamp in seconds for when the resource was last updated.</p>"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "tags": [
+            "preview"
+          ]
+        },
+        "resourceOwner": {
+          "shape": "AccountId",
+          "tags": [
+            "preview"
+          ]
         },
         "uid": {
           "shape": "String",
@@ -1506,6 +1560,14 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
+        },
         "spec": {
           "shape": "VirtualServiceSpec",
           "documentation": "<p>The new virtual service specification to apply. This overwrites the existing\n         data.</p>"
@@ -1607,6 +1669,14 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
+        },
         "nextToken": {
           "shape": "String",
           "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListRoutes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p>",
@@ -1668,6 +1738,8 @@
       "required": [
         "arn",
         "meshName",
+        "meshOwner",
+        "resourceOwner",
         "virtualServiceName"
       ],
       "members": {
@@ -1678,6 +1750,18 @@
         "meshName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the service mesh that the virtual service resides in.</p>"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "tags": [
+            "preview"
+          ]
+        },
+        "resourceOwner": {
+          "shape": "AccountId",
+          "tags": [
+            "preview"
+          ]
         },
         "virtualServiceName": {
           "shape": "ServiceName",
@@ -1742,6 +1826,8 @@
       "required": [
         "arn",
         "meshName",
+        "meshOwner",
+        "resourceOwner",
         "virtualRouterName"
       ],
       "members": {
@@ -1752,6 +1838,18 @@
         "meshName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the service mesh that the virtual router resides in.</p>"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "tags": [
+            "preview"
+          ]
+        },
+        "resourceOwner": {
+          "shape": "AccountId",
+          "tags": [
+            "preview"
+          ]
         },
         "virtualRouterName": {
           "shape": "ResourceName",
@@ -1860,6 +1958,8 @@
       "required": [
         "arn",
         "meshName",
+        "meshOwner",
+        "resourceOwner",
         "virtualNodeName"
       ],
       "members": {
@@ -1870,6 +1970,18 @@
         "meshName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the service mesh that the virtual node resides in.</p>"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "tags": [
+            "preview"
+          ]
+        },
+        "resourceOwner": {
+          "shape": "AccountId",
+          "tags": [
+            "preview"
+          ]
         },
         "virtualNodeName": {
           "shape": "ResourceName",
@@ -2027,6 +2139,14 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
+        },
         "virtualServiceName": {
           "shape": "ServiceName",
           "documentation": "<p>The name of the virtual service to describe.</p>",
@@ -2055,6 +2175,14 @@
           "documentation": "<p>The name of the service mesh to delete the route in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
         },
         "routeName": {
           "shape": "ResourceName",
@@ -2193,6 +2321,14 @@
           "location": "querystring",
           "locationName": "limit"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
+        },
         "nextToken": {
           "shape": "String",
           "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListMeshes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p> \n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>",
@@ -2247,6 +2383,14 @@
           "documentation": "<p>The name of the service mesh to list virtual routers in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
         },
         "nextToken": {
           "shape": "String",
@@ -2345,6 +2489,14 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
+        },
         "nextToken": {
           "shape": "String",
           "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListVirtualServices</code> request where <code>limit</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value.</p>",
@@ -2372,6 +2524,14 @@
           "documentation": "<p>The name of the service mesh to create the virtual router in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
         },
         "spec": {
           "shape": "VirtualRouterSpec",
@@ -2411,6 +2571,14 @@
           "documentation": "<p>The name of the service mesh to list virtual nodes in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
         },
         "nextToken": {
           "shape": "String",
@@ -2569,6 +2737,11 @@
       "min": 1,
       "max": 255
     },
+    "AccountId": {
+      "type": "string",
+      "min": 12,
+      "max": 12
+    },
     "VirtualNodeSpec": {
       "type": "structure",
       "members": {
@@ -2720,7 +2893,9 @@
       "type": "structure",
       "required": [
         "arn",
-        "meshName"
+        "meshName",
+        "meshOwner",
+        "resourceOwner"
       ],
       "members": {
         "arn": {
@@ -2730,6 +2905,18 @@
         "meshName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the service mesh.</p>"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "tags": [
+            "preview"
+          ]
+        },
+        "resourceOwner": {
+          "shape": "AccountId",
+          "tags": [
+            "preview"
+          ]
         }
       },
       "documentation": "<p>An object that represents a service mesh returned by a list operation.</p>"
@@ -2887,6 +3074,14 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
+        },
         "virtualNodeName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the virtual node to describe.</p>",
@@ -2914,6 +3109,8 @@
       "required": [
         "arn",
         "meshName",
+        "meshOwner",
+        "resourceOwner",
         "routeName",
         "virtualRouterName"
       ],
@@ -2925,6 +3122,18 @@
         "meshName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the service mesh that the route resides in.</p>"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "tags": [
+            "preview"
+          ]
+        },
+        "resourceOwner": {
+          "shape": "AccountId",
+          "tags": [
+            "preview"
+          ]
         },
         "routeName": {
           "shape": "ResourceName",
@@ -3000,6 +3209,14 @@
           "documentation": "<p>The name of the service mesh to delete the virtual node in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
         },
         "virtualNodeName": {
           "shape": "ResourceName",
@@ -3207,6 +3424,14 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
+        },
         "virtualRouterName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the virtual router to describe.</p>",
@@ -3364,6 +3589,14 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
+        },
         "routeName": {
           "shape": "ResourceName",
           "documentation": "<p>The name to use for the route.</p>"
@@ -3503,6 +3736,14 @@
           "location": "uri",
           "locationName": "meshName"
         },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
+        },
         "routeName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the route to update.</p>",
@@ -3550,6 +3791,14 @@
           "documentation": "<p>The name of the service mesh to create the virtual node in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
         },
         "spec": {
           "shape": "VirtualNodeSpec",
@@ -3642,6 +3891,14 @@
           "documentation": "<p>The name of the service mesh to describe.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
         }
       },
       "documentation": ""
@@ -3719,6 +3976,14 @@
           "documentation": "<p>The name of the service mesh to delete the virtual service in.</p>",
           "location": "uri",
           "locationName": "meshName"
+        },
+        "meshOwner": {
+          "shape": "AccountId",
+          "location": "querystring",
+          "locationName": "meshOwner",
+          "tags": [
+            "preview"
+          ]
         },
         "virtualServiceName": {
           "shape": "ServiceName",
