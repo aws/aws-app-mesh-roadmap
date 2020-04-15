@@ -16,9 +16,14 @@ Knowing about our upcoming products and priorities helps our customers plan. Thi
 [See the roadmap »](https://github.com/aws/aws-app-mesh-roadmap/projects/1)
 
 ## Beta Channel
-The App Mesh team recently announced the upcoming availability of a Beta Channel, a new public service endpoint which allows every customer to try out and provide feedback on beta service features before they are generally available. This new service endpoint will be separate from the standard production endpoint, and will be coupled with preview releases of the AWS CLI for App Mesh, allowing customers to test beta features without impacting their current production infrastructure.
+AWS App Mesh offers a Beta Channel, a public service endpoint which allows every customer to try out and provide feedback on beta service features before they are generally available. The service endpoint is separate from the standard production endpoint, and is coupled with preview releases of the AWS CLI for App Mesh, allowing customers to test beta features without impacting their current production infrastructure.
 
 For more information on the Beta Channel, see [AWS App Mesh Beta Channel](/BETA-CHANNEL.md).
+
+## Slack Community
+AWS App Mesh participates in an open Slack community in which participants can share tips and tricks, get help troubleshooting a problem, or discuss new and potential future features of App Mesh.
+
+The slack community can be found at https://awsappmesh.slack.com, and you can join the slack community with [this invite](https://join.slack.com/t/awsappmesh/shared_invite/zt-dwgbt85c-Sj_md92__quV8YADKfsQSA).
 
 ## Security disclosures
 
