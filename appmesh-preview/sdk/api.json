@@ -2365,6 +2365,23 @@
         }
       }
     },
+    "ListenerTimeout": {
+      "type": "structure",
+      "members": {
+        "grpc": {
+          "shape": "GrpcTimeout"
+        },
+        "http": {
+          "shape": "HttpTimeout"
+        },
+        "http2": {
+          "shape": "HttpTimeout"
+        },
+        "tcp": {
+          "shape": "TcpTimeout"
+        }
+      }
+    },
     "MeshList": {
       "type": "list",
       "member": {
