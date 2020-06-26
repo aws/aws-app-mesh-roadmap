@@ -828,10 +828,6 @@
         "Listener$tls": "<p>A reference to an object that represents the Transport Layer Security (TLS) properties for a listener.</p>"
       }
     },
-    "ListenerTimeout": {
-      "base": null,
-      "refs": { }
-    },
     "ListenerTls": {
       "base": "<p>An object that represents the Transport Layer Security (TLS) properties for a listener.</p>",
       "refs": {

@@ -2500,23 +2500,6 @@
         }
       }
     },
-    "ListenerTimeout": {
-      "type": "structure",
-      "members": {
-        "grpc": {
-          "shape": "GrpcTimeout"
-        },
-        "http": {
-          "shape": "HttpTimeout"
-        },
-        "http2": {
-          "shape": "HttpTimeout"
-        },
-        "tcp": {
-          "shape": "TcpTimeout"
-        }
-      }
-    },
     "MeshList": {
       "type": "list",
       "member": {
@@ -4852,12 +4835,6 @@
         "portMapping": {
           "shape": "PortMapping",
           "documentation": "<p>The port mapping information for the listener.</p>"
-        },
-        "timeout": {
-          "shape": "ListenerTimeout",
-          "tags": [
-            "preview"
-          ]
         },
         "tls": {
           "shape": "ListenerTls",
