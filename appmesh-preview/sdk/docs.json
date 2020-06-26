@@ -518,7 +518,8 @@
       "refs": {
         "GrpcRoute$action": "<p>An object that represents the action to take if a match is determined.</p>",
         "GrpcRoute$match": "<p>An object that represents the criteria for determining a request match.</p>",
-        "GrpcRoute$retryPolicy": "<p>An object that represents a retry policy.</p>"
+        "GrpcRoute$retryPolicy": "<p>An object that represents a retry policy.</p>",
+        "GrpcRoute$timeout": "<p>An object that represents types of timeouts. </p>"
       }
     },
     "GrpcRouteAction": {
@@ -560,8 +561,11 @@
       }
     },
     "GrpcTimeout": {
-      "base": null,
-      "refs": { }
+      "base": "<p>An object that represents types of timeouts. </p>",
+      "refs": {
+        "GrpcTimeout$idle": "<p>An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.</p>",
+        "GrpcTimeout$perRequest": "<p>An object that represents a per request timeout. The default value is 15 seconds. If you set a higher timeout, then make sure that the higher value is set for each App Mesh resource in a conversation. For example, if a virtual node backend uses a virtual router provider to route to another virtual node, then the timeout should be greater than 15 seconds for the source and destination virtual node and the route.</p>"
+      }
     },
     "HeaderMatch": {
       "base": null,
@@ -649,7 +653,8 @@
       "refs": {
         "HttpRoute$action": "<p>An object that represents the action to take if a match is determined.</p>",
         "HttpRoute$match": "<p>An object that represents the criteria for determining a request match.</p>",
-        "HttpRoute$retryPolicy": "<p>An object that represents a retry policy.</p>"
+        "HttpRoute$retryPolicy": "<p>An object that represents a retry policy.</p>",
+        "HttpRoute$timeout": "<p>An object that represents types of timeouts. </p>"
       }
     },
     "HttpRouteAction": {
@@ -686,8 +691,11 @@
       "refs": { }
     },
     "HttpTimeout": {
-      "base": null,
-      "refs": { }
+      "base": "<p>An object that represents types of timeouts. </p>",
+      "refs": {
+        "HttpTimeout$idle": "<p>An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.</p>",
+        "HttpTimeout$perRequest": "<p>An object that represents a per request timeout. The default value is 15 seconds. If you set a higher timeout, then make sure that the higher value is set for each App Mesh resource in a conversation. For example, if a virtual node backend uses a virtual router provider to route to another virtual node, then the timeout should be greater than 15 seconds for the source and destination virtual node and the route.</p>"
+      }
     },
     "InternalServerErrorException": {
       "base": "<p>The request processing has failed because of an unknown error, exception, or\n         failure.</p>",
@@ -825,7 +833,17 @@
       "refs": {
         "Listener$healthCheck": "<p>The health check information for the listener.</p>",
         "Listener$portMapping": "<p>The port mapping information for the listener.</p>",
+        "Listener$timeout": "<p>An object that represents timeouts for different protocols.</p>",
         "Listener$tls": "<p>A reference to an object that represents the Transport Layer Security (TLS) properties for a listener.</p>"
+      }
+    },
+    "ListenerTimeout": {
+      "base": "<p>An object that represents timeouts for different protocols.</p>",
+      "refs": {
+        "ListenerTimeout$grpc": "<p>An object that represents types of timeouts. </p>",
+        "ListenerTimeout$http": "<p>An object that represents types of timeouts. </p>",
+        "ListenerTimeout$http2": "<p>An object that represents types of timeouts. </p>",
+        "ListenerTimeout$tcp": "<p>An object that represents types of timeouts. </p>"
       }
     },
     "ListenerTls": {
@@ -1090,7 +1108,8 @@
     "TcpRoute": {
       "base": "<p>An object that represents a TCP route type.</p>",
       "refs": {
-        "TcpRoute$action": "<p>The action to take if a match is determined.</p>"
+        "TcpRoute$action": "<p>The action to take if a match is determined.</p>",
+        "TcpRoute$timeout": "<p>An object that represents types of timeouts. </p>"
       }
     },
     "TcpRouteAction": {
@@ -1100,8 +1119,10 @@
       }
     },
     "TcpTimeout": {
-      "base": null,
-      "refs": { }
+      "base": "<p>An object that represents types of timeouts. </p>",
+      "refs": {
+        "TcpTimeout$idle": "<p>An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.</p>"
+      }
     },
     "Timestamp": {
       "base": null,

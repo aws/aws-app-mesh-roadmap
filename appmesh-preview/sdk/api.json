@@ -1700,6 +1700,9 @@
         },
         "listeners": {
           "shape": "VirtualGatewayListeners"
+        },
+        "logging": {
+          "shape": "VirtualGatewayLogging"
         }
       }
     },
@@ -1843,9 +1846,6 @@
       "members": {
         "healthCheck": {
           "shape": "VirtualGatewayHealthCheckPolicy"
-        },
-        "logging": {
-          "shape": "VirtualGatewayLogging"
         },
         "portMapping": {
           "shape": "VirtualGatewayPortMapping"
@@ -3996,10 +3996,7 @@
           "shape": "TcpRouteAction"
         },
         "timeout": {
-          "shape": "TcpTimeout",
-          "tags": [
-            "preview"
-          ]
+          "shape": "TcpTimeout"
         }
       }
     },
@@ -4437,6 +4434,9 @@
         "portMapping": {
           "shape": "PortMapping"
         },
+        "timeout": {
+          "shape": "ListenerTimeout"
+        },
         "tls": {
           "shape": "ListenerTls"
         }
@@ -4459,10 +4459,7 @@
           "shape": "GrpcRetryPolicy"
         },
         "timeout": {
-          "shape": "GrpcTimeout",
-          "tags": [
-            "preview"
-          ]
+          "shape": "GrpcTimeout"
         }
       }
     },
@@ -4883,10 +4880,7 @@
           "shape": "HttpRetryPolicy"
         },
         "timeout": {
-          "shape": "HttpTimeout",
-          "tags": [
-            "preview"
-          ]
+          "shape": "HttpTimeout"
         }
       }
     },
