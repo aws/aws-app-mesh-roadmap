@@ -1772,6 +1772,9 @@
         },
         "listeners": {
           "shape": "VirtualGatewayListeners"
+        },
+        "logging": {
+          "shape": "VirtualGatewayLogging"
         }
       }
     },
@@ -1921,9 +1924,6 @@
       "members": {
         "healthCheck": {
           "shape": "VirtualGatewayHealthCheckPolicy"
-        },
-        "logging": {
-          "shape": "VirtualGatewayLogging"
         },
         "portMapping": {
           "shape": "VirtualGatewayPortMapping"
@@ -2504,18 +2504,23 @@
       "type": "structure",
       "members": {
         "grpc": {
-          "shape": "GrpcTimeout"
+          "shape": "GrpcTimeout",
+          "documentation": "<p>An object that represents types of timeouts. </p>"
         },
         "http": {
-          "shape": "HttpTimeout"
+          "shape": "HttpTimeout",
+          "documentation": "<p>An object that represents types of timeouts. </p>"
         },
         "http2": {
-          "shape": "HttpTimeout"
+          "shape": "HttpTimeout",
+          "documentation": "<p>An object that represents types of timeouts. </p>"
         },
         "tcp": {
-          "shape": "TcpTimeout"
+          "shape": "TcpTimeout",
+          "documentation": "<p>An object that represents types of timeouts. </p>"
         }
-      }
+      },
+      "documentation": "<p>An object that represents timeouts for different protocols.</p>"
     },
     "MeshList": {
       "type": "list",
@@ -3282,12 +3287,15 @@
       "type": "structure",
       "members": {
         "idle": {
-          "shape": "Duration"
+          "shape": "Duration",
+          "documentation": "<p>An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.</p>"
         },
         "perRequest": {
-          "shape": "Duration"
+          "shape": "Duration",
+          "documentation": "<p>An object that represents a per request timeout. The default value is 15 seconds. If you set a higher timeout, then make sure that the higher value is set for each App Mesh resource in a conversation. For example, if a virtual node backend uses a virtual router provider to route to another virtual node, then the timeout should be greater than 15 seconds for the source and destination virtual node and the route.</p>"
         }
-      }
+      },
+      "documentation": "<p>An object that represents types of timeouts. </p>"
     },
     "DeleteVirtualServiceInput": {
       "type": "structure",
@@ -3936,12 +3944,15 @@
       "type": "structure",
       "members": {
         "idle": {
-          "shape": "Duration"
+          "shape": "Duration",
+          "documentation": "<p>An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.</p>"
         },
         "perRequest": {
-          "shape": "Duration"
+          "shape": "Duration",
+          "documentation": "<p>An object that represents a per request timeout. The default value is 15 seconds. If you set a higher timeout, then make sure that the higher value is set for each App Mesh resource in a conversation. For example, if a virtual node backend uses a virtual router provider to route to another virtual node, then the timeout should be greater than 15 seconds for the source and destination virtual node and the route.</p>"
         }
-      }
+      },
+      "documentation": "<p>An object that represents types of timeouts. </p>"
     },
     "VirtualNodeStatus": {
       "type": "structure",
@@ -4356,9 +4367,7 @@
         },
         "timeout": {
           "shape": "TcpTimeout",
-          "tags": [
-            "preview"
-          ]
+          "documentation": "<p>An object that represents types of timeouts. </p>"
         }
       },
       "documentation": "<p>An object that represents a TCP route type.</p>"
@@ -4855,9 +4864,7 @@
         },
         "timeout": {
           "shape": "ListenerTimeout",
-          "tags": [
-            "preview"
-          ]
+          "documentation": "<p>An object that represents timeouts for different protocols.</p>"
         },
         "tls": {
           "shape": "ListenerTls",
@@ -4887,9 +4894,7 @@
         },
         "timeout": {
           "shape": "GrpcTimeout",
-          "tags": [
-            "preview"
-          ]
+          "documentation": "<p>An object that represents types of timeouts. </p>"
         }
       },
       "documentation": "<p>An object that represents a gRPC route type.</p>"
@@ -5250,9 +5255,11 @@
       "type": "structure",
       "members": {
         "idle": {
-          "shape": "Duration"
+          "shape": "Duration",
+          "documentation": "<p>An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.</p>"
         }
-      }
+      },
+      "documentation": "<p>An object that represents types of timeouts. </p>"
     },
     "HttpScheme": {
       "type": "string",
@@ -5357,9 +5364,7 @@
         },
         "timeout": {
           "shape": "HttpTimeout",
-          "tags": [
-            "preview"
-          ]
+          "documentation": "<p>An object that represents types of timeouts. </p>"
         }
       },
       "documentation": "<p>An object that represents an HTTP or HTTP/2 route type.</p>"
