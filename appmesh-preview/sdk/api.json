@@ -1485,6 +1485,28 @@
         }
       }
     },
+    "VirtualNodeConnectionPool": {
+      "type": "structure",
+      "members": {
+        "grpc": {
+          "shape": "VirtualNodeGrpcConnectionPool"
+        },
+        "http": {
+          "shape": "VirtualNodeHttpConnectionPool"
+        },
+        "http2": {
+          "shape": "VirtualNodeHttp2ConnectionPool"
+        },
+        "tcp": {
+          "shape": "VirtualNodeTcpConnectionPool"
+        }
+      }
+    },
+    "OutlierDetectionMaxServerErrors": {
+      "type": "long",
+      "box": true,
+      "min": 1
+    },
     "ResourceMetadata": {
       "type": "structure",
       "required": [
@@ -1679,6 +1701,21 @@
         }
       }
     },
+    "VirtualNodeHttpConnectionPool": {
+      "type": "structure",
+      "required": [
+        "maxConnections",
+        "maxPendingRequests"
+      ],
+      "members": {
+        "maxConnections": {
+          "shape": "MaxConnections"
+        },
+        "maxPendingRequests": {
+          "shape": "MaxPendingRequests"
+        }
+      }
+    },
     "VirtualGatewayHealthCheckIntervalMillis": {
       "type": "long",
       "box": true,
@@ -1796,8 +1833,7 @@
     "AwsCloudMapName": {
       "type": "string",
       "min": 1,
-      "max": 1024,
-      "pattern": "((?=^.{1,127}$)^([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9])(.([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9]))*$)|(^.$)"
+      "max": 1024
     },
     "VirtualGatewayData": {
       "type": "structure",
@@ -1844,6 +1880,12 @@
         "portMapping"
       ],
       "members": {
+        "connectionPool": {
+          "shape": "VirtualGatewayConnectionPool",
+          "tags": [
+            "preview"
+          ]
+        },
         "healthCheck": {
           "shape": "VirtualGatewayHealthCheckPolicy"
         },
@@ -2284,6 +2326,17 @@
         },
         "serviceDiscovery": {
           "shape": "ServiceDiscovery"
+        }
+      }
+    },
+    "VirtualNodeGrpcConnectionPool": {
+      "type": "structure",
+      "required": [
+        "maxRequests"
+      ],
+      "members": {
+        "maxRequests": {
+          "shape": "MaxRequests"
         }
       }
     },
@@ -3110,6 +3163,17 @@
         }
       }
     },
+    "VirtualNodeTcpConnectionPool": {
+      "type": "structure",
+      "required": [
+        "maxConnections"
+      ],
+      "members": {
+        "maxConnections": {
+          "shape": "MaxConnections"
+        }
+      }
+    },
     "GatewayRouteStatusCode": {
       "type": "string",
       "enum": [
@@ -3176,6 +3240,25 @@
         }
       },
       "payload": "virtualNode"
+    },
+    "MaxPendingRequests": {
+      "type": "integer",
+      "min": 1
+    },
+    "VirtualGatewayHttpConnectionPool": {
+      "type": "structure",
+      "required": [
+        "maxConnections",
+        "maxPendingRequests"
+      ],
+      "members": {
+        "maxConnections": {
+          "shape": "MaxConnections"
+        },
+        "maxPendingRequests": {
+          "shape": "MaxPendingRequests"
+        }
+      }
     },
     "UpdateVirtualNodeInput": {
       "type": "structure",
@@ -3646,6 +3729,17 @@
         }
       }
     },
+    "VirtualGatewayGrpcConnectionPool": {
+      "type": "structure",
+      "required": [
+        "maxRequests"
+      ],
+      "members": {
+        "maxRequests": {
+          "shape": "MaxRequests"
+        }
+      }
+    },
     "GrpcTimeout": {
       "type": "structure",
       "members": {
@@ -3731,6 +3825,17 @@
         },
         "virtualServiceName": {
           "shape": "ServiceName"
+        }
+      }
+    },
+    "VirtualGatewayHttp2ConnectionPool": {
+      "type": "structure",
+      "required": [
+        "maxRequests"
+      ],
+      "members": {
+        "maxRequests": {
+          "shape": "MaxRequests"
         }
       }
     },
@@ -3867,6 +3972,10 @@
       },
       "payload": "mesh"
     },
+    "MaxConnections": {
+      "type": "integer",
+      "min": 1
+    },
     "GrpcRouteMetadataMatchMethod": {
       "type": "structure",
       "members": {
@@ -3915,6 +4024,12 @@
       "type": "integer",
       "box": true,
       "min": 1,
+      "max": 100
+    },
+    "OutlierDetectionMaxEjectionPercent": {
+      "type": "integer",
+      "box": true,
+      "min": 0,
       "max": 100
     },
     "AwsCloudMapInstanceAttribute": {
@@ -4148,6 +4263,29 @@
         }
       }
     },
+    "OutlierDetection": {
+      "type": "structure",
+      "required": [
+        "baseEjectionDuration",
+        "interval",
+        "maxEjectionPercent",
+        "maxServerErrors"
+      ],
+      "members": {
+        "baseEjectionDuration": {
+          "shape": "Duration"
+        },
+        "interval": {
+          "shape": "Duration"
+        },
+        "maxEjectionPercent": {
+          "shape": "OutlierDetectionMaxEjectionPercent"
+        },
+        "maxServerErrors": {
+          "shape": "OutlierDetectionMaxServerErrors"
+        }
+      }
+    },
     "ListVirtualNodesLimit": {
       "type": "integer",
       "box": true,
@@ -4159,6 +4297,20 @@
       "box": true,
       "min": 2000,
       "max": 60000
+    },
+    "VirtualGatewayConnectionPool": {
+      "type": "structure",
+      "members": {
+        "grpc": {
+          "shape": "VirtualGatewayGrpcConnectionPool"
+        },
+        "http": {
+          "shape": "VirtualGatewayHttpConnectionPool"
+        },
+        "http2": {
+          "shape": "VirtualGatewayHttp2ConnectionPool"
+        }
+      }
     },
     "ResourceName": {
       "type": "string",
@@ -4208,6 +4360,17 @@
       "members": {
         "virtualService": {
           "shape": "GatewayRouteVirtualService"
+        }
+      }
+    },
+    "VirtualNodeHttp2ConnectionPool": {
+      "type": "structure",
+      "required": [
+        "maxRequests"
+      ],
+      "members": {
+        "maxRequests": {
+          "shape": "MaxRequests"
         }
       }
     },
@@ -4439,14 +4602,30 @@
         }
       }
     },
+    "MaxRequests": {
+      "type": "integer",
+      "min": 1
+    },
     "Listener": {
       "type": "structure",
       "required": [
         "portMapping"
       ],
       "members": {
+        "connectionPool": {
+          "shape": "VirtualNodeConnectionPool",
+          "tags": [
+            "preview"
+          ]
+        },
         "healthCheck": {
           "shape": "HealthCheckPolicy"
+        },
+        "outlierDetection": {
+          "shape": "OutlierDetection",
+          "tags": [
+            "preview"
+          ]
         },
         "portMapping": {
           "shape": "PortMapping"
