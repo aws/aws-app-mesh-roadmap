@@ -1513,6 +1513,9 @@
                 "validation"
             ],
             "members": {
+                "certificate": {
+                    "shape": "ClientTlsCertificate"
+                },
                 "enforce": {
                     "shape": "Boolean",
                     "documentation": "<p>Whether the policy is enforced. The default is <code>True</code>, if a value isn't specified.</p>",
@@ -1528,6 +1531,18 @@
                 }
             },
             "documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) client policy.</p>"
+        },
+        "ClientTlsCertificate": {
+            "type": "structure",
+            "members": {
+                "file": {
+                    "shape": "ListenerTlsFileCertificate"
+                },
+                "sds": {
+                    "shape": "ListenerTlsSdsCertificate"
+                }
+            },
+            "union": true
         },
         "ConflictException": {
             "type": "structure",
@@ -3687,14 +3702,16 @@
             ],
             "members": {
                 "connectionPool": {
-                    "shape": "VirtualNodeConnectionPool"
+                    "shape": "VirtualNodeConnectionPool",
+                    "documentation": "<p>The connection pool information for the listener.</p>"
                 },
                 "healthCheck": {
                     "shape": "HealthCheckPolicy",
                     "documentation": "<p>The health check information for the listener.</p>"
                 },
                 "outlierDetection": {
-                    "shape": "OutlierDetection"
+                    "shape": "OutlierDetection",
+                    "documentation": "<p>The outlier detection information for the listener.</p>"
                 },
                 "portMapping": {
                     "shape": "PortMapping",
@@ -3747,6 +3764,9 @@
                 "mode": {
                     "shape": "ListenerTlsMode",
                     "documentation": "<p>Specify one of the following modes.</p> <ul> <li> <p> <b/>STRICT – Listener only accepts connections with TLS enabled. </p> </li> <li> <p> <b/>PERMISSIVE – Listener accepts connections with or without TLS enabled.</p> </li> <li> <p> <b/>DISABLED – Listener only accepts connections without TLS. </p> </li> </ul>"
+                },
+                "validation": {
+                    "shape": "ListenerTlsValidationContext"
                 }
             },
             "documentation": "<p>An object that represents the Transport Layer Security (TLS) properties for a listener.</p>"
@@ -3774,6 +3794,9 @@
                 "file": {
                     "shape": "ListenerTlsFileCertificate",
                     "documentation": "<p>A reference to an object that represents a local file certificate.</p>"
+                },
+                "sds": {
+                    "shape": "ListenerTlsSdsCertificate"
                 }
             },
             "documentation": "<p>An object that represents a listener's Transport Layer Security (TLS) certificate.</p>",
@@ -3804,6 +3827,43 @@
                 "PERMISSIVE",
                 "DISABLED"
             ]
+        },
+        "ListenerTlsSdsCertificate": {
+            "type": "structure",
+            "required": [
+                "secretName"
+            ],
+            "members": {
+                "secretName": {
+                    "shape": "SdsSecretName"
+                }
+            }
+        },
+        "ListenerTlsValidationContext": {
+            "type": "structure",
+            "required": [
+                "trust"
+            ],
+            "members": {
+                "subjectAlternativeNames": {
+                    "shape": "SubjectAlternativeNames"
+                },
+                "trust": {
+                    "shape": "ListenerTlsValidationContextTrust"
+                }
+            }
+        },
+        "ListenerTlsValidationContextTrust": {
+            "type": "structure",
+            "members": {
+                "file": {
+                    "shape": "TlsValidationContextFileTrust"
+                },
+                "sds": {
+                    "shape": "TlsValidationContextSdsTrust"
+                }
+            },
+            "union": true
         },
         "Listeners": {
             "type": "list",
@@ -3996,18 +4056,23 @@
             ],
             "members": {
                 "baseEjectionDuration": {
-                    "shape": "Duration"
+                    "shape": "Duration",
+                    "documentation": "<p>The base amount of time for which a host is ejected.</p>"
                 },
                 "interval": {
-                    "shape": "Duration"
+                    "shape": "Duration",
+                    "documentation": "<p>The time interval between ejection sweep analysis.</p>"
                 },
                 "maxEjectionPercent": {
-                    "shape": "OutlierDetectionMaxEjectionPercent"
+                    "shape": "OutlierDetectionMaxEjectionPercent",
+                    "documentation": "<p>Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value.</p>"
                 },
                 "maxServerErrors": {
-                    "shape": "OutlierDetectionMaxServerErrors"
+                    "shape": "OutlierDetectionMaxServerErrors",
+                    "documentation": "<p>Number of consecutive <code>5xx</code> errors required for ejection. </p>"
                 }
-            }
+            },
+            "documentation": "<p>An object that represents the outlier detection for a virtual node's listener.</p>"
         },
         "OutlierDetectionMaxEjectionPercent": {
             "type": "integer",
@@ -4275,6 +4340,9 @@
                 "DELETED"
             ]
         },
+        "SdsSecretName": {
+            "type": "string"
+        },
         "ServiceDiscovery": {
             "type": "structure",
             "members": {
@@ -4313,6 +4381,39 @@
         "String": {
             "type": "string"
         },
+        "SubjectAlternativeName": {
+            "type": "string",
+            "max": 254,
+            "min": 1
+        },
+        "SubjectAlternativeNameList": {
+            "type": "list",
+            "member": {
+                "shape": "SubjectAlternativeName"
+            }
+        },
+        "SubjectAlternativeNameMatchers": {
+            "type": "structure",
+            "required": [
+                "exact"
+            ],
+            "members": {
+                "exact": {
+                    "shape": "SubjectAlternativeNameList"
+                }
+            }
+        },
+        "SubjectAlternativeNames": {
+            "type": "structure",
+            "required": [
+                "match"
+            ],
+            "members": {
+                "match": {
+                    "shape": "SubjectAlternativeNameMatchers"
+                }
+            }
+        },
         "TagKey": {
             "type": "string",
             "max": 128,
@@ -4329,7 +4430,8 @@
         "TagRef": {
             "type": "structure",
             "required": [
-                "key"
+                "key",
+                "value"
             ],
             "members": {
                 "key": {
@@ -4411,6 +4513,9 @@
                 "trust"
             ],
             "members": {
+                "subjectAlternativeNames": {
+                    "shape": "SubjectAlternativeNames"
+                },
                 "trust": {
                     "shape": "TlsValidationContextTrust",
                     "documentation": "<p>A reference to an object that represents a TLS validation context trust.</p>"
@@ -4444,6 +4549,17 @@
             },
             "documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>"
         },
+        "TlsValidationContextSdsTrust": {
+            "type": "structure",
+            "required": [
+                "secretName"
+            ],
+            "members": {
+                "secretName": {
+                    "shape": "SdsSecretName"
+                }
+            }
+        },
         "TlsValidationContextTrust": {
             "type": "structure",
             "members": {
@@ -4454,6 +4570,9 @@
                 "file": {
                     "shape": "TlsValidationContextFileTrust",
                     "documentation": "<p>An object that represents a TLS validation context trust for a local file.</p>"
+                },
+                "sds": {
+                    "shape": "TlsValidationContextSdsTrust"
                 }
             },
             "documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust.</p>",
@@ -4471,7 +4590,10 @@
                 "httpStatusCode": 429,
                 "senderFault": true
             },
-            "exception": true
+            "exception": true,
+            "retryable": {
+                "throttling": true
+            }
         },
         "UpdateGatewayRouteInput": {
             "type": "structure",
@@ -4877,6 +4999,9 @@
                 "validation"
             ],
             "members": {
+                "certificate": {
+                    "shape": "VirtualGatewayClientTlsCertificate"
+                },
                 "enforce": {
                     "shape": "Boolean",
                     "documentation": "<p>Whether the policy is enforced. The default is <code>True</code>, if a value isn't specified.</p>",
@@ -4893,19 +5018,35 @@
             },
             "documentation": "<p>An object that represents a Transport Layer Security (TLS) client policy.</p>"
         },
+        "VirtualGatewayClientTlsCertificate": {
+            "type": "structure",
+            "members": {
+                "file": {
+                    "shape": "VirtualGatewayListenerTlsFileCertificate"
+                },
+                "sds": {
+                    "shape": "VirtualGatewayListenerTlsSdsCertificate"
+                }
+            },
+            "union": true
+        },
         "VirtualGatewayConnectionPool": {
             "type": "structure",
             "members": {
                 "grpc": {
-                    "shape": "VirtualGatewayGrpcConnectionPool"
+                    "shape": "VirtualGatewayGrpcConnectionPool",
+                    "documentation": "<p>An object that represents a type of connection pool. </p>"
                 },
                 "http": {
-                    "shape": "VirtualGatewayHttpConnectionPool"
+                    "shape": "VirtualGatewayHttpConnectionPool",
+                    "documentation": "<p>An object that represents a type of connection pool.</p>"
                 },
                 "http2": {
-                    "shape": "VirtualGatewayHttp2ConnectionPool"
+                    "shape": "VirtualGatewayHttp2ConnectionPool",
+                    "documentation": "<p>An object that represents a type of connection pool.</p>"
                 }
             },
+            "documentation": "<p>An object that represents the type of virtual gateway connection pool.</p> <p>Only one protocol is used at a time and should be the same protocol as the one chosen under port mapping.</p> <p>If not present the default value for <code>maxPendingRequests</code> is <code>2147483647</code>.</p>",
             "union": true
         },
         "VirtualGatewayData": {
@@ -4960,9 +5101,11 @@
             ],
             "members": {
                 "maxRequests": {
-                    "shape": "MaxRequests"
+                    "shape": "MaxRequests",
+                    "documentation": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object that represents a type of connection pool.</p>"
         },
         "VirtualGatewayHealthCheckIntervalMillis": {
             "type": "long",
@@ -5029,9 +5172,11 @@
             ],
             "members": {
                 "maxRequests": {
-                    "shape": "MaxRequests"
+                    "shape": "MaxRequests",
+                    "documentation": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object that represents a type of connection pool.</p>"
         },
         "VirtualGatewayHttpConnectionPool": {
             "type": "structure",
@@ -5040,13 +5185,16 @@
             ],
             "members": {
                 "maxConnections": {
-                    "shape": "MaxConnections"
+                    "shape": "MaxConnections",
+                    "documentation": "<p>Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster.</p>"
                 },
                 "maxPendingRequests": {
                     "shape": "MaxPendingRequests",
+                    "documentation": "<p>Number of overflowing requests after <code>max_connections</code> Envoy will queue to upstream cluster.</p>",
                     "box": true
                 }
-            }
+            },
+            "documentation": "<p>An object that represents a type of connection pool.</p>"
         },
         "VirtualGatewayList": {
             "type": "list",
@@ -5061,7 +5209,8 @@
             ],
             "members": {
                 "connectionPool": {
-                    "shape": "VirtualGatewayConnectionPool"
+                    "shape": "VirtualGatewayConnectionPool",
+                    "documentation": "<p>The connection pool information for the virtual gateway listener.</p>"
                 },
                 "healthCheck": {
                     "shape": "VirtualGatewayHealthCheckPolicy",
@@ -5092,6 +5241,9 @@
                 "mode": {
                     "shape": "VirtualGatewayListenerTlsMode",
                     "documentation": "<p>Specify one of the following modes.</p> <ul> <li> <p> <b/>STRICT – Listener only accepts connections with TLS enabled. </p> </li> <li> <p> <b/>PERMISSIVE – Listener accepts connections with or without TLS enabled.</p> </li> <li> <p> <b/>DISABLED – Listener only accepts connections without TLS. </p> </li> </ul>"
+                },
+                "validation": {
+                    "shape": "VirtualGatewayListenerTlsValidationContext"
                 }
             },
             "documentation": "<p>An object that represents the Transport Layer Security (TLS) properties for a listener.</p>"
@@ -5119,6 +5271,9 @@
                 "file": {
                     "shape": "VirtualGatewayListenerTlsFileCertificate",
                     "documentation": "<p>A reference to an object that represents a local file certificate.</p>"
+                },
+                "sds": {
+                    "shape": "VirtualGatewayListenerTlsSdsCertificate"
                 }
             },
             "documentation": "<p>An object that represents a listener's Transport Layer Security (TLS) certificate.</p>",
@@ -5149,6 +5304,40 @@
                 "PERMISSIVE",
                 "DISABLED"
             ]
+        },
+        "VirtualGatewayListenerTlsSdsCertificate": {
+            "type": "structure",
+            "members": {
+                "secretName": {
+                    "shape": "VirtualGatewaySdsSecretName"
+                }
+            }
+        },
+        "VirtualGatewayListenerTlsValidationContext": {
+            "type": "structure",
+            "required": [
+                "trust"
+            ],
+            "members": {
+                "subjectAlternativeNames": {
+                    "shape": "SubjectAlternativeNames"
+                },
+                "trust": {
+                    "shape": "VirtualGatewayListenerTlsValidationContextTrust"
+                }
+            }
+        },
+        "VirtualGatewayListenerTlsValidationContextTrust": {
+            "type": "structure",
+            "members": {
+                "file": {
+                    "shape": "VirtualGatewayTlsValidationContextFileTrust"
+                },
+                "sds": {
+                    "shape": "VirtualGatewayTlsValidationContextSdsTrust"
+                }
+            },
+            "union": true
         },
         "VirtualGatewayListeners": {
             "type": "list",
@@ -5242,6 +5431,9 @@
             },
             "documentation": "<p>An object that represents a virtual gateway returned by a list operation.</p>"
         },
+        "VirtualGatewaySdsSecretName": {
+            "type": "string"
+        },
         "VirtualGatewaySpec": {
             "type": "structure",
             "required": [
@@ -5289,6 +5481,9 @@
                 "trust"
             ],
             "members": {
+                "subjectAlternativeNames": {
+                    "shape": "SubjectAlternativeNames"
+                },
                 "trust": {
                     "shape": "VirtualGatewayTlsValidationContextTrust",
                     "documentation": "<p>A reference to an object that represents a TLS validation context trust.</p>"
@@ -5322,6 +5517,17 @@
             },
             "documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>"
         },
+        "VirtualGatewayTlsValidationContextSdsTrust": {
+            "type": "structure",
+            "required": [
+                "secretName"
+            ],
+            "members": {
+                "secretName": {
+                    "shape": "VirtualGatewaySdsSecretName"
+                }
+            }
+        },
         "VirtualGatewayTlsValidationContextTrust": {
             "type": "structure",
             "members": {
@@ -5332,6 +5538,9 @@
                 "file": {
                     "shape": "VirtualGatewayTlsValidationContextFileTrust",
                     "documentation": "<p>An object that represents a TLS validation context trust for a local file.</p>"
+                },
+                "sds": {
+                    "shape": "VirtualGatewayTlsValidationContextSdsTrust"
                 }
             },
             "documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust.</p>",
@@ -5341,18 +5550,23 @@
             "type": "structure",
             "members": {
                 "grpc": {
-                    "shape": "VirtualNodeGrpcConnectionPool"
+                    "shape": "VirtualNodeGrpcConnectionPool",
+                    "documentation": "<p>An object that represents a type of connection pool.</p>"
                 },
                 "http": {
-                    "shape": "VirtualNodeHttpConnectionPool"
+                    "shape": "VirtualNodeHttpConnectionPool",
+                    "documentation": "<p>An object that represents a type of connection pool.</p>"
                 },
                 "http2": {
-                    "shape": "VirtualNodeHttp2ConnectionPool"
+                    "shape": "VirtualNodeHttp2ConnectionPool",
+                    "documentation": "<p>An object that represents a type of connection pool.</p>"
                 },
                 "tcp": {
-                    "shape": "VirtualNodeTcpConnectionPool"
+                    "shape": "VirtualNodeTcpConnectionPool",
+                    "documentation": "<p>An object that represents a type of connection pool.</p>"
                 }
             },
+            "documentation": "<p>An object that represents the type of virtual node connection pool.</p> <p>Only one protocol is used at a time and should be the same protocol as the one chosen under port mapping.</p> <p>If not present the default value for <code>maxPendingRequests</code> is <code>2147483647</code>.</p> <p/>",
             "union": true
         },
         "VirtualNodeData": {
@@ -5395,9 +5609,11 @@
             ],
             "members": {
                 "maxRequests": {
-                    "shape": "MaxRequests"
+                    "shape": "MaxRequests",
+                    "documentation": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object that represents a type of connection pool.</p>"
         },
         "VirtualNodeHttp2ConnectionPool": {
             "type": "structure",
@@ -5406,9 +5622,11 @@
             ],
             "members": {
                 "maxRequests": {
-                    "shape": "MaxRequests"
+                    "shape": "MaxRequests",
+                    "documentation": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object that represents a type of connection pool.</p>"
         },
         "VirtualNodeHttpConnectionPool": {
             "type": "structure",
@@ -5417,13 +5635,16 @@
             ],
             "members": {
                 "maxConnections": {
-                    "shape": "MaxConnections"
+                    "shape": "MaxConnections",
+                    "documentation": "<p>Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster.</p>"
                 },
                 "maxPendingRequests": {
                     "shape": "MaxPendingRequests",
+                    "documentation": "<p>Number of overflowing requests after <code>max_connections</code> Envoy will queue to upstream cluster.</p>",
                     "box": true
                 }
-            }
+            },
+            "documentation": "<p>An object that represents a type of connection pool.</p>"
         },
         "VirtualNodeList": {
             "type": "list",
@@ -5546,9 +5767,11 @@
             ],
             "members": {
                 "maxConnections": {
-                    "shape": "MaxConnections"
+                    "shape": "MaxConnections",
+                    "documentation": "<p>Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object that represents a type of connection pool.</p>"
         },
         "VirtualRouterData": {
             "type": "structure",
