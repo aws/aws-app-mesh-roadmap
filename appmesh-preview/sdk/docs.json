@@ -202,6 +202,12 @@
         "ClientPolicy$tls": "<p>A reference to an object that represents a Transport Layer Security (TLS) client policy.</p>"
       }
     },
+    "ClientTlsCertificate": {
+      "base": null,
+      "refs": {
+        "ClientPolicyTls$certificate": null
+      }
+    },
     "ConflictException": {
       "base": "<p>The request contains a client token that was used for a previous update resource call with different specifications. Try the request again with a new client token.</p>",
       "refs": {
@@ -432,8 +438,8 @@
         "HttpRetryPolicy$perRetryTimeout": "<p>The timeout for each retry attempt.</p>",
         "HttpTimeout$idle": "<p>An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.</p>",
         "HttpTimeout$perRequest": "<p>An object that represents a per request timeout. The default value is 15 seconds. If you set a higher timeout, then make sure that the higher value is set for each App Mesh resource in a conversation. For example, if a virtual node backend uses a virtual router provider to route to another virtual node, then the timeout should be greater than 15 seconds for the source and destination virtual node and the route.</p>",
-        "OutlierDetection$baseEjectionDuration": null,
-        "OutlierDetection$interval": null,
+        "OutlierDetection$baseEjectionDuration": "<p>The base amount of time for which a host is ejected.</p>",
+        "OutlierDetection$interval": "<p>The time interval between ejection sweep analysis.</p>",
         "TcpTimeout$idle": "<p>An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.</p>"
       }
     },
@@ -919,6 +925,7 @@
     "ListenerTlsFileCertificate": {
       "base": "<p>An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>",
       "refs": {
+        "ClientTlsCertificate$file": null,
         "ListenerTlsCertificate$file": "<p>A reference to an object that represents a local file certificate.</p>"
       }
     },
@@ -926,6 +933,25 @@
       "base": null,
       "refs": {
         "ListenerTls$mode": "<p>Specify one of the following modes.</p> <ul> <li> <p> <b/>STRICT – Listener only accepts connections with TLS enabled. </p> </li> <li> <p> <b/>PERMISSIVE – Listener accepts connections with or without TLS enabled.</p> </li> <li> <p> <b/>DISABLED – Listener only accepts connections without TLS. </p> </li> </ul>"
+      }
+    },
+    "ListenerTlsSdsCertificate": {
+      "base": null,
+      "refs": {
+        "ClientTlsCertificate$sds": null,
+        "ListenerTlsCertificate$sds": null
+      }
+    },
+    "ListenerTlsValidationContext": {
+      "base": null,
+      "refs": {
+        "ListenerTls$validation": null
+      }
+    },
+    "ListenerTlsValidationContextTrust": {
+      "base": null,
+      "refs": {
+        "ListenerTlsValidationContext$trust": null
       }
     },
     "Listeners": {
@@ -965,25 +991,25 @@
     "MaxConnections": {
       "base": null,
       "refs": {
-        "VirtualGatewayHttpConnectionPool$maxConnections": null,
-        "VirtualNodeHttpConnectionPool$maxConnections": null,
-        "VirtualNodeTcpConnectionPool$maxConnections": null
+        "VirtualGatewayHttpConnectionPool$maxConnections": "<p>Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster.</p>",
+        "VirtualNodeHttpConnectionPool$maxConnections": "<p>Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster.</p>",
+        "VirtualNodeTcpConnectionPool$maxConnections": "<p>Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster.</p>"
       }
     },
     "MaxPendingRequests": {
       "base": null,
       "refs": {
-        "VirtualGatewayHttpConnectionPool$maxPendingRequests": null,
-        "VirtualNodeHttpConnectionPool$maxPendingRequests": null
+        "VirtualGatewayHttpConnectionPool$maxPendingRequests": "<p>Number of overflowing requests after <code>max_connections</code> Envoy will queue to upstream cluster.</p>",
+        "VirtualNodeHttpConnectionPool$maxPendingRequests": "<p>Number of overflowing requests after <code>max_connections</code> Envoy will queue to upstream cluster.</p>"
       }
     },
     "MaxRequests": {
       "base": null,
       "refs": {
-        "VirtualGatewayGrpcConnectionPool$maxRequests": null,
-        "VirtualGatewayHttp2ConnectionPool$maxRequests": null,
-        "VirtualNodeGrpcConnectionPool$maxRequests": null,
-        "VirtualNodeHttp2ConnectionPool$maxRequests": null
+        "VirtualGatewayGrpcConnectionPool$maxRequests": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster.</p>",
+        "VirtualGatewayHttp2ConnectionPool$maxRequests": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster.</p>",
+        "VirtualNodeGrpcConnectionPool$maxRequests": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster.</p>",
+        "VirtualNodeHttp2ConnectionPool$maxRequests": "<p>Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster.</p>"
       }
     },
     "MaxRetries": {
@@ -1046,21 +1072,21 @@
       }
     },
     "OutlierDetection": {
-      "base": null,
+      "base": "<p>An object that represents the outlier detection for a virtual node's listener.</p>",
       "refs": {
-        "Listener$outlierDetection": null
+        "Listener$outlierDetection": "<p>The outlier detection information for the listener.</p>"
       }
     },
     "OutlierDetectionMaxEjectionPercent": {
       "base": null,
       "refs": {
-        "OutlierDetection$maxEjectionPercent": null
+        "OutlierDetection$maxEjectionPercent": "<p>Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value.</p>"
       }
     },
     "OutlierDetectionMaxServerErrors": {
       "base": null,
       "refs": {
-        "OutlierDetection$maxServerErrors": null
+        "OutlierDetection$maxServerErrors": "<p>Number of consecutive <code>5xx</code> errors required for ejection. </p>"
       }
     },
     "PercentInt": {
@@ -1265,6 +1291,13 @@
         "RouteStatus$status": "<p>The current status for the route.</p>"
       }
     },
+    "SdsSecretName": {
+      "base": null,
+      "refs": {
+        "ListenerTlsSdsCertificate$secretName": null,
+        "TlsValidationContextSdsTrust$secretName": null
+      }
+    },
     "ServiceDiscovery": {
       "base": "<p>An object that represents the service discovery information for a virtual node.</p>",
       "refs": {
@@ -1335,6 +1368,33 @@
         "UpdateVirtualRouterInput$clientToken": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
         "UpdateVirtualServiceInput$clientToken": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
         "VirtualGatewayHealthCheckPolicy$path": "<p>The destination path for the health check request. This value is only used if the specified protocol is HTTP or HTTP/2. For any other protocol, this value is ignored.</p>"
+      }
+    },
+    "SubjectAlternativeName": {
+      "base": null,
+      "refs": {
+        "SubjectAlternativeNameList$member": null
+      }
+    },
+    "SubjectAlternativeNameList": {
+      "base": null,
+      "refs": {
+        "SubjectAlternativeNameMatchers$exact": null
+      }
+    },
+    "SubjectAlternativeNameMatchers": {
+      "base": null,
+      "refs": {
+        "SubjectAlternativeNames$match": null
+      }
+    },
+    "SubjectAlternativeNames": {
+      "base": null,
+      "refs": {
+        "ListenerTlsValidationContext$subjectAlternativeNames": null,
+        "TlsValidationContext$subjectAlternativeNames": null,
+        "VirtualGatewayListenerTlsValidationContext$subjectAlternativeNames": null,
+        "VirtualGatewayTlsValidationContext$subjectAlternativeNames": null
       }
     },
     "TagKey": {
@@ -1430,7 +1490,15 @@
     "TlsValidationContextFileTrust": {
       "base": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>",
       "refs": {
+        "ListenerTlsValidationContextTrust$file": null,
         "TlsValidationContextTrust$file": "<p>An object that represents a TLS validation context trust for a local file.</p>"
+      }
+    },
+    "TlsValidationContextSdsTrust": {
+      "base": null,
+      "refs": {
+        "ListenerTlsValidationContextTrust$sds": null,
+        "TlsValidationContextTrust$sds": null
       }
     },
     "TlsValidationContextTrust": {
@@ -1544,10 +1612,16 @@
         "VirtualGatewayClientPolicy$tls": "<p>A reference to an object that represents a Transport Layer Security (TLS) client policy.</p>"
       }
     },
-    "VirtualGatewayConnectionPool": {
+    "VirtualGatewayClientTlsCertificate": {
       "base": null,
       "refs": {
-        "VirtualGatewayListener$connectionPool": null
+        "VirtualGatewayClientPolicyTls$certificate": null
+      }
+    },
+    "VirtualGatewayConnectionPool": {
+      "base": "<p>An object that represents the type of virtual gateway connection pool.</p> <p>Only one protocol is used at a time and should be the same protocol as the one chosen under port mapping.</p> <p>If not present the default value for <code>maxPendingRequests</code> is <code>2147483647</code>.</p>",
+      "refs": {
+        "VirtualGatewayListener$connectionPool": "<p>The connection pool information for the virtual gateway listener.</p>"
       }
     },
     "VirtualGatewayData": {
@@ -1566,9 +1640,9 @@
       }
     },
     "VirtualGatewayGrpcConnectionPool": {
-      "base": null,
+      "base": "<p>An object that represents a type of connection pool.</p>",
       "refs": {
-        "VirtualGatewayConnectionPool$grpc": null
+        "VirtualGatewayConnectionPool$grpc": "<p>An object that represents a type of connection pool. </p>"
       }
     },
     "VirtualGatewayHealthCheckIntervalMillis": {
@@ -1597,15 +1671,15 @@
       }
     },
     "VirtualGatewayHttp2ConnectionPool": {
-      "base": null,
+      "base": "<p>An object that represents a type of connection pool.</p>",
       "refs": {
-        "VirtualGatewayConnectionPool$http2": null
+        "VirtualGatewayConnectionPool$http2": "<p>An object that represents a type of connection pool.</p>"
       }
     },
     "VirtualGatewayHttpConnectionPool": {
-      "base": null,
+      "base": "<p>An object that represents a type of connection pool.</p>",
       "refs": {
-        "VirtualGatewayConnectionPool$http": null
+        "VirtualGatewayConnectionPool$http": "<p>An object that represents a type of connection pool.</p>"
       }
     },
     "VirtualGatewayList": {
@@ -1641,6 +1715,7 @@
     "VirtualGatewayListenerTlsFileCertificate": {
       "base": "<p>An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>",
       "refs": {
+        "VirtualGatewayClientTlsCertificate$file": null,
         "VirtualGatewayListenerTlsCertificate$file": "<p>A reference to an object that represents a local file certificate.</p>"
       }
     },
@@ -1648,6 +1723,25 @@
       "base": null,
       "refs": {
         "VirtualGatewayListenerTls$mode": "<p>Specify one of the following modes.</p> <ul> <li> <p> <b/>STRICT – Listener only accepts connections with TLS enabled. </p> </li> <li> <p> <b/>PERMISSIVE – Listener accepts connections with or without TLS enabled.</p> </li> <li> <p> <b/>DISABLED – Listener only accepts connections without TLS. </p> </li> </ul>"
+      }
+    },
+    "VirtualGatewayListenerTlsSdsCertificate": {
+      "base": null,
+      "refs": {
+        "VirtualGatewayClientTlsCertificate$sds": null,
+        "VirtualGatewayListenerTlsCertificate$sds": null
+      }
+    },
+    "VirtualGatewayListenerTlsValidationContext": {
+      "base": null,
+      "refs": {
+        "VirtualGatewayListenerTls$validation": null
+      }
+    },
+    "VirtualGatewayListenerTlsValidationContextTrust": {
+      "base": null,
+      "refs": {
+        "VirtualGatewayListenerTlsValidationContext$trust": null
       }
     },
     "VirtualGatewayListeners": {
@@ -1679,6 +1773,13 @@
       "base": "<p>An object that represents a virtual gateway returned by a list operation.</p>",
       "refs": {
         "VirtualGatewayList$member": null
+      }
+    },
+    "VirtualGatewaySdsSecretName": {
+      "base": null,
+      "refs": {
+        "VirtualGatewayListenerTlsSdsCertificate$secretName": null,
+        "VirtualGatewayTlsValidationContextSdsTrust$secretName": null
       }
     },
     "VirtualGatewaySpec": {
@@ -1716,7 +1817,15 @@
     "VirtualGatewayTlsValidationContextFileTrust": {
       "base": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>",
       "refs": {
+        "VirtualGatewayListenerTlsValidationContextTrust$file": null,
         "VirtualGatewayTlsValidationContextTrust$file": "<p>An object that represents a TLS validation context trust for a local file.</p>"
+      }
+    },
+    "VirtualGatewayTlsValidationContextSdsTrust": {
+      "base": null,
+      "refs": {
+        "VirtualGatewayListenerTlsValidationContextTrust$sds": null,
+        "VirtualGatewayTlsValidationContextTrust$sds": null
       }
     },
     "VirtualGatewayTlsValidationContextTrust": {
@@ -1726,9 +1835,9 @@
       }
     },
     "VirtualNodeConnectionPool": {
-      "base": null,
+      "base": "<p>An object that represents the type of virtual node connection pool.</p> <p>Only one protocol is used at a time and should be the same protocol as the one chosen under port mapping.</p> <p>If not present the default value for <code>maxPendingRequests</code> is <code>2147483647</code>.</p> <p/>",
       "refs": {
-        "Listener$connectionPool": null
+        "Listener$connectionPool": "<p>The connection pool information for the listener.</p>"
       }
     },
     "VirtualNodeData": {
@@ -1741,21 +1850,21 @@
       }
     },
     "VirtualNodeGrpcConnectionPool": {
-      "base": null,
+      "base": "<p>An object that represents a type of connection pool.</p>",
       "refs": {
-        "VirtualNodeConnectionPool$grpc": null
+        "VirtualNodeConnectionPool$grpc": "<p>An object that represents a type of connection pool.</p>"
       }
     },
     "VirtualNodeHttp2ConnectionPool": {
-      "base": null,
+      "base": "<p>An object that represents a type of connection pool.</p>",
       "refs": {
-        "VirtualNodeConnectionPool$http2": null
+        "VirtualNodeConnectionPool$http2": "<p>An object that represents a type of connection pool.</p>"
       }
     },
     "VirtualNodeHttpConnectionPool": {
-      "base": null,
+      "base": "<p>An object that represents a type of connection pool.</p>",
       "refs": {
-        "VirtualNodeConnectionPool$http": null
+        "VirtualNodeConnectionPool$http": "<p>An object that represents a type of connection pool.</p>"
       }
     },
     "VirtualNodeList": {
@@ -1797,9 +1906,9 @@
       }
     },
     "VirtualNodeTcpConnectionPool": {
-      "base": null,
+      "base": "<p>An object that represents a type of connection pool.</p>",
       "refs": {
-        "VirtualNodeConnectionPool$tcp": null
+        "VirtualNodeConnectionPool$tcp": "<p>An object that represents a type of connection pool.</p>"
       }
     },
     "VirtualRouterData": {
