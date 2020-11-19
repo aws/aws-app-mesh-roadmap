@@ -5307,6 +5307,9 @@
         },
         "VirtualGatewayListenerTlsSdsCertificate": {
             "type": "structure",
+            "required": [
+                "secretName"
+            ],
             "members": {
                 "secretName": {
                     "shape": "VirtualGatewaySdsSecretName"
