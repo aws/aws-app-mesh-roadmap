@@ -178,7 +178,9 @@
       "base": null,
       "refs": {
         "ClientPolicyTls$enforce": "<p>Whether the policy is enforced. The default is <code>True</code>, if a value isn't specified.</p>",
+        "GrpcGatewayRouteMetadata$invert": null,
         "GrpcRouteMetadata$invert": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>",
+        "HttpGatewayRouteHeader$invert": null,
         "HttpRouteHeader$invert": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>",
         "VirtualGatewayClientPolicyTls$enforce": "<p>Whether the policy is enforced. The default is <code>True</code>, if a value isn't specified.</p>"
       }
@@ -203,9 +205,9 @@
       }
     },
     "ClientTlsCertificate": {
-      "base": null,
+      "base": "<p>An object that represents the client's certificate.</p>",
       "refs": {
-        "ClientPolicyTls$certificate": null
+        "ClientPolicyTls$certificate": "<p>A reference to an object that represents a client's TLS certificate.</p>"
       }
     },
     "ConflictException": {
@@ -281,6 +283,13 @@
     "CreateVirtualServiceOutput": {
       "base": "<zonbook></zonbook><xhtml></xhtml>",
       "refs": {
+      }
+    },
+    "DefaultGatewayRouteRewrite": {
+      "base": null,
+      "refs": {
+        "GatewayRouteHostnameRewrite$defaultTargetHostname": null,
+        "HttpGatewayRoutePrefixRewrite$defaultPrefix": null
       }
     },
     "DeleteGatewayRouteInput": {
@@ -467,6 +476,12 @@
         "EgressFilter$type": "<p>The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows egress only from virtual nodes to other defined resources in the service mesh (and any traffic to <code>*.amazonaws.com</code> for AWS API calls). You can set the egress filter type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the service mesh.</p>"
       }
     },
+    "ExactHostName": {
+      "base": null,
+      "refs": {
+        "GatewayRouteHostnameMatch$exact": null
+      }
+    },
     "FileAccessLog": {
       "base": "<p>An object that represents an access log file.</p>",
       "refs": {
@@ -500,10 +515,30 @@
         "UpdateGatewayRouteOutput$gatewayRoute": "<p>A full description of the gateway route that was updated.</p>"
       }
     },
+    "GatewayRouteHostnameMatch": {
+      "base": null,
+      "refs": {
+        "GrpcGatewayRouteMatch$hostname": null,
+        "HttpGatewayRouteMatch$hostname": null
+      }
+    },
+    "GatewayRouteHostnameRewrite": {
+      "base": null,
+      "refs": {
+        "GrpcGatewayRouteRewrite$hostname": null,
+        "HttpGatewayRouteRewrite$hostname": null
+      }
+    },
     "GatewayRouteList": {
       "base": null,
       "refs": {
         "ListGatewayRoutesOutput$gatewayRoutes": "<p>The list of existing gateway routes for the specified service mesh and virtual gateway.</p>"
+      }
+    },
+    "GatewayRoutePriority": {
+      "base": null,
+      "refs": {
+        "GatewayRouteSpec$priority": null
       }
     },
     "GatewayRouteRef": {
@@ -539,6 +574,12 @@
         "HttpGatewayRouteAction$target": "<p>An object that represents the target that traffic is routed to when a request matches the gateway route.</p>"
       }
     },
+    "GatewayRouteTargetBasedHostnameRewrite": {
+      "base": null,
+      "refs": {
+        "GatewayRouteHostnameRewrite$targetBased": null
+      }
+    },
     "GatewayRouteVirtualService": {
       "base": "<p>An object that represents the virtual service that traffic is routed to.</p>",
       "refs": {
@@ -563,8 +604,32 @@
         "GrpcGatewayRoute$match": "<p>An object that represents the criteria for determining a request match.</p>"
       }
     },
+    "GrpcGatewayRouteMetadata": {
+      "base": null,
+      "refs": {
+        "GrpcGatewayRouteMetadataList$member": null
+      }
+    },
+    "GrpcGatewayRouteMetadataList": {
+      "base": null,
+      "refs": {
+        "GrpcGatewayRouteMatch$metadata": null
+      }
+    },
+    "GrpcGatewayRouteRewrite": {
+      "base": null,
+      "refs": {
+        "GrpcGatewayRouteAction$rewrite": null
+      }
+    },
+    "GrpcMetadataMatchMethod": {
+      "base": null,
+      "refs": {
+        "GrpcGatewayRouteMetadata$match": null
+      }
+    },
     "GrpcRetryPolicy": {
-      "base": "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>.</p>",
+      "base": "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>. Both <code>server-error</code> and <code>gateway-error</code> under <code>httpRetryEvents</code> include the Envoy <code>reset</code> policy. For more information on the <code>reset</code> policy, see the <a href=\"https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on\">Envoy documentation</a>.</p>",
       "refs": {
         "GrpcRoute$retryPolicy": "<p>An object that represents a retry policy.</p>"
       }
@@ -627,6 +692,10 @@
     "HeaderMatch": {
       "base": null,
       "refs": {
+        "GrpcMetadataMatchMethod$exact": null,
+        "GrpcMetadataMatchMethod$prefix": null,
+        "GrpcMetadataMatchMethod$regex": null,
+        "GrpcMetadataMatchMethod$suffix": null,
         "GrpcRouteMetadataMatchMethod$exact": "<p>The value sent by the client must match the specified value exactly.</p>",
         "GrpcRouteMetadataMatchMethod$prefix": "<p>The value sent by the client must begin with the specified characters.</p>",
         "GrpcRouteMetadataMatchMethod$regex": "<p>The value sent by the client must include the specified characters.</p>",
@@ -640,13 +709,16 @@
     "HeaderMatchMethod": {
       "base": "<p>An object that represents the method and value to match with the header value sent in a request. Specify one match method.</p>",
       "refs": {
+        "HttpGatewayRouteHeader$match": null,
         "HttpRouteHeader$match": "<p>The <code>HeaderMatchMethod</code> object.</p>"
       }
     },
     "HeaderName": {
       "base": null,
       "refs": {
+        "GrpcGatewayRouteMetadata$name": null,
         "GrpcRouteMetadata$name": "<p>The name of the route.</p>",
+        "HttpGatewayRouteHeader$name": null,
         "HttpRouteHeader$name": "<p>A name for the HTTP header in the client request that will be matched on.</p>"
       }
     },
@@ -694,20 +766,90 @@
         "HttpGatewayRoute$action": "<p>An object that represents the action to take if a match is determined.</p>"
       }
     },
+    "HttpGatewayRouteHeader": {
+      "base": null,
+      "refs": {
+        "HttpGatewayRouteHeaders$member": null
+      }
+    },
+    "HttpGatewayRouteHeaders": {
+      "base": null,
+      "refs": {
+        "HttpGatewayRouteMatch$headers": null
+      }
+    },
     "HttpGatewayRouteMatch": {
       "base": "<p>An object that represents the criteria for determining a request match.</p>",
       "refs": {
         "HttpGatewayRoute$match": "<p>An object that represents the criteria for determining a request match.</p>"
       }
     },
+    "HttpGatewayRoutePathRewrite": {
+      "base": null,
+      "refs": {
+        "HttpGatewayRouteRewrite$path": null
+      }
+    },
+    "HttpGatewayRoutePrefix": {
+      "base": null,
+      "refs": {
+        "HttpGatewayRoutePrefixRewrite$prefix": null
+      }
+    },
+    "HttpGatewayRoutePrefixRewrite": {
+      "base": null,
+      "refs": {
+        "HttpGatewayRouteRewrite$prefix": null
+      }
+    },
+    "HttpGatewayRouteRewrite": {
+      "base": null,
+      "refs": {
+        "HttpGatewayRouteAction$rewrite": null
+      }
+    },
     "HttpMethod": {
       "base": null,
       "refs": {
+        "HttpGatewayRouteMatch$method": null,
         "HttpRouteMatch$method": "<p>The client request method to match on. Specify only one.</p>"
       }
     },
+    "HttpPathExact": {
+      "base": null,
+      "refs": {
+        "HttpGatewayRoutePathRewrite$exact": null,
+        "HttpPathMatch$exact": null
+      }
+    },
+    "HttpPathMatch": {
+      "base": null,
+      "refs": {
+        "HttpGatewayRouteMatch$path": null,
+        "HttpRouteMatch$path": null
+      }
+    },
+    "HttpPathRegex": {
+      "base": null,
+      "refs": {
+        "HttpPathMatch$regex": null
+      }
+    },
+    "HttpQueryParameter": {
+      "base": null,
+      "refs": {
+        "HttpQueryParameters$member": null
+      }
+    },
+    "HttpQueryParameters": {
+      "base": null,
+      "refs": {
+        "HttpGatewayRouteMatch$queryParameters": null,
+        "HttpRouteMatch$queryParameters": null
+      }
+    },
     "HttpRetryPolicy": {
-      "base": "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>.</p>",
+      "base": "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>. Both <code>server-error</code> and <code>gateway-error</code> under <code>httpRetryEvents</code> include the Envoy <code>reset</code> policy. For more information on the <code>reset</code> policy, see the <a href=\"https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on\">Envoy documentation</a>.</p>",
       "refs": {
         "HttpRoute$retryPolicy": "<p>An object that represents a retry policy.</p>"
       }
@@ -919,13 +1061,13 @@
     "ListenerTlsCertificate": {
       "base": "<p>An object that represents a listener's Transport Layer Security (TLS) certificate.</p>",
       "refs": {
-        "ListenerTls$certificate": "<p>A reference to an object that represents a listener's TLS certificate.</p>"
+        "ListenerTls$certificate": "<p>A reference to an object that represents a listener's Transport Layer Security (TLS) certificate.</p>"
       }
     },
     "ListenerTlsFileCertificate": {
       "base": "<p>An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>",
       "refs": {
-        "ClientTlsCertificate$file": null,
+        "ClientTlsCertificate$file": "<p>An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">Transport Layer Security (TLS)</a>.</p>",
         "ListenerTlsCertificate$file": "<p>A reference to an object that represents a local file certificate.</p>"
       }
     },
@@ -936,22 +1078,22 @@
       }
     },
     "ListenerTlsSdsCertificate": {
-      "base": null,
+      "base": "<p>An object that represents the listener's Secret Discovery Service certificate. The proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS documentation</a> for more info.</p>",
       "refs": {
-        "ClientTlsCertificate$sds": null,
-        "ListenerTlsCertificate$sds": null
+        "ClientTlsCertificate$sds": "<p>A reference to an object that represents a client's TLS Secret Discovery Service certificate.</p>",
+        "ListenerTlsCertificate$sds": "<p>A reference to an object that represents a listener's Secret Discovery Service certificate.</p>"
       }
     },
     "ListenerTlsValidationContext": {
-      "base": null,
+      "base": "<p>An object that represents a listener's Transport Layer Security (TLS) validation context.</p>",
       "refs": {
-        "ListenerTls$validation": null
+        "ListenerTls$validation": "<p>A reference to an object that represents a listener's Transport Layer Security (TLS) validation context.</p>"
       }
     },
     "ListenerTlsValidationContextTrust": {
-      "base": null,
+      "base": "<p>An object that represents a listener's Transport Layer Security (TLS) validation context trust.</p>",
       "refs": {
-        "ListenerTlsValidationContext$trust": null
+        "ListenerTlsValidationContext$trust": "<p>A reference to where to retrieve the trust chain when validating a peer’s Transport Layer Security (TLS) certificate.</p>"
       }
     },
     "Listeners": {
@@ -984,6 +1126,7 @@
     "MatchRange": {
       "base": "<p>An object that represents the range of values to match on. The first character of the range is included in the range, though the last character is not. For example, if the range specified were 1-100, only values 1-99 would be matched.</p>",
       "refs": {
+        "GrpcMetadataMatchMethod$range": null,
         "GrpcRouteMetadataMatchMethod$range": "<p>An object that represents the range of values to match on.</p>",
         "HeaderMatchMethod$range": "<p>An object that represents the range of values to match on.</p>"
       }
@@ -1124,6 +1267,18 @@
       "refs": {
         "ClientPolicyTls$ports": "<p>One or more ports that the policy is enforced for.</p>",
         "VirtualGatewayClientPolicyTls$ports": "<p>One or more ports that the policy is enforced for.</p>"
+      }
+    },
+    "QueryParameterMatch": {
+      "base": null,
+      "refs": {
+        "HttpQueryParameter$match": null
+      }
+    },
+    "QueryParameterName": {
+      "base": null,
+      "refs": {
+        "HttpQueryParameter$name": null
       }
     },
     "ResourceInUseException": {
@@ -1294,8 +1449,8 @@
     "SdsSecretName": {
       "base": null,
       "refs": {
-        "ListenerTlsSdsCertificate$secretName": null,
-        "TlsValidationContextSdsTrust$secretName": null
+        "ListenerTlsSdsCertificate$secretName": "<p>A reference to an object that represents the name of the secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.</p>",
+        "TlsValidationContextSdsTrust$secretName": "<p>A reference to an object that represents the name of the secret for a Transport Layer Security (TLS) Secret Discovery Service validation context trust.</p>"
       }
     },
     "ServiceDiscovery": {
@@ -1356,6 +1511,7 @@
         "ListVirtualServicesInput$nextToken": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListVirtualServices</code> request where <code>limit</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p>",
         "ListVirtualServicesOutput$nextToken": "<p>The <code>nextToken</code> value to include in a future <code>ListVirtualServices</code> request. When the results of a <code>ListVirtualServices</code> request exceed <code>limit</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
         "NotFoundException$message": null,
+        "QueryParameterMatch$exact": null,
         "ResourceInUseException$message": null,
         "ResourceMetadata$uid": "<p>The unique identifier for the resource.</p>",
         "ServiceUnavailableException$message": null,
@@ -1379,22 +1535,28 @@
     "SubjectAlternativeNameList": {
       "base": null,
       "refs": {
-        "SubjectAlternativeNameMatchers$exact": null
+        "SubjectAlternativeNameMatchers$exact": "<p>The values sent must match the specified values exactly.</p>"
       }
     },
     "SubjectAlternativeNameMatchers": {
-      "base": null,
+      "base": "<p>An object that represents the methods by which a subject alternative name on a peer Transport Layer Security (TLS) certificate can be matched.</p>",
       "refs": {
-        "SubjectAlternativeNames$match": null
+        "SubjectAlternativeNames$match": "<p>An object that represents the criteria for determining a SANs match.</p>"
       }
     },
     "SubjectAlternativeNames": {
+      "base": "<p>An object that represents the subject alternative names secured by the certificate.</p>",
+      "refs": {
+        "ListenerTlsValidationContext$subjectAlternativeNames": "<p>A reference to an object that represents the SANs for a listener's Transport Layer Security (TLS) validation context.</p>",
+        "TlsValidationContext$subjectAlternativeNames": "<p>A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context.</p>",
+        "VirtualGatewayListenerTlsValidationContext$subjectAlternativeNames": "<p>A reference to an object that represents the SANs for a virtual gateway listener's Transport Layer Security (TLS) validation context.</p>",
+        "VirtualGatewayTlsValidationContext$subjectAlternativeNames": "<p>A reference to an object that represents the SANs for a virtual gateway's listener's Transport Layer Security (TLS) validation context.</p>"
+      }
+    },
+    "SuffixHostname": {
       "base": null,
       "refs": {
-        "ListenerTlsValidationContext$subjectAlternativeNames": null,
-        "TlsValidationContext$subjectAlternativeNames": null,
-        "VirtualGatewayListenerTlsValidationContext$subjectAlternativeNames": null,
-        "VirtualGatewayTlsValidationContext$subjectAlternativeNames": null
+        "GatewayRouteHostnameMatch$suffix": null
       }
     },
     "TagKey": {
@@ -1476,35 +1638,35 @@
       }
     },
     "TlsValidationContext": {
-      "base": "<p>An object that represents a Transport Layer Security (TLS) validation context.</p>",
+      "base": "<p>An object that represents how the proxy will validate its peer during Transport Layer Security (TLS) negotiation.</p>",
       "refs": {
         "ClientPolicyTls$validation": "<p>A reference to an object that represents a TLS validation context.</p>"
       }
     },
     "TlsValidationContextAcmTrust": {
-      "base": "<p>An object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.</p>",
+      "base": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.</p>",
       "refs": {
-        "TlsValidationContextTrust$acm": "<p>A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.</p>"
+        "TlsValidationContextTrust$acm": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.</p>"
       }
     },
     "TlsValidationContextFileTrust": {
       "base": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>",
       "refs": {
-        "ListenerTlsValidationContextTrust$file": null,
-        "TlsValidationContextTrust$file": "<p>An object that represents a TLS validation context trust for a local file.</p>"
+        "ListenerTlsValidationContextTrust$file": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>",
+        "TlsValidationContextTrust$file": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>"
       }
     },
     "TlsValidationContextSdsTrust": {
-      "base": null,
+      "base": "<p>An object that represents a Transport Layer Security (TLS) Secret Discovery Service validation context trust. The proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS documentation</a> for more info.</p>",
       "refs": {
-        "ListenerTlsValidationContextTrust$sds": null,
-        "TlsValidationContextTrust$sds": null
+        "ListenerTlsValidationContextTrust$sds": "<p>A reference to an object that represents a listener's Transport Layer Security (TLS) Secret Discovery Service validation context trust.</p>",
+        "TlsValidationContextTrust$sds": "<p>A reference to an object that represents a Transport Layer Security (TLS) Secret Discovery Service validation context trust.</p>"
       }
     },
     "TlsValidationContextTrust": {
       "base": "<p>An object that represents a Transport Layer Security (TLS) validation context trust.</p>",
       "refs": {
-        "TlsValidationContext$trust": "<p>A reference to an object that represents a TLS validation context trust.</p>"
+        "TlsValidationContext$trust": "<p>A reference to where to retrieve the trust chain when validating a peer’s Transport Layer Security (TLS) certificate.</p>"
       }
     },
     "TooManyRequestsException": {
@@ -1613,9 +1775,9 @@
       }
     },
     "VirtualGatewayClientTlsCertificate": {
-      "base": null,
+      "base": "<p>An object that represents the virtual gateway's client's Transport Layer Security (TLS) certificate.</p>",
       "refs": {
-        "VirtualGatewayClientPolicyTls$certificate": null
+        "VirtualGatewayClientPolicyTls$certificate": "<p>A reference to an object that represents a virtual gateway's client's Transport Layer Security (TLS) certificate.</p>"
       }
     },
     "VirtualGatewayConnectionPool": {
@@ -1715,7 +1877,7 @@
     "VirtualGatewayListenerTlsFileCertificate": {
       "base": "<p>An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>",
       "refs": {
-        "VirtualGatewayClientTlsCertificate$file": null,
+        "VirtualGatewayClientTlsCertificate$file": "<p>An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\"> Transport Layer Security (TLS) </a>.</p>",
         "VirtualGatewayListenerTlsCertificate$file": "<p>A reference to an object that represents a local file certificate.</p>"
       }
     },
@@ -1726,22 +1888,22 @@
       }
     },
     "VirtualGatewayListenerTlsSdsCertificate": {
-      "base": null,
+      "base": "<p>An object that represents the virtual gateway's listener's Secret Discovery Service certificate.The proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh<a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS documentation</a> for more info. </p>",
       "refs": {
-        "VirtualGatewayClientTlsCertificate$sds": null,
-        "VirtualGatewayListenerTlsCertificate$sds": null
+        "VirtualGatewayClientTlsCertificate$sds": "<p>A reference to an object that represents a virtual gateway's client's Secret Discovery Service certificate.</p>",
+        "VirtualGatewayListenerTlsCertificate$sds": "<p>A reference to an object that represents a virtual gateway's listener's Secret Discovery Service certificate.</p>"
       }
     },
     "VirtualGatewayListenerTlsValidationContext": {
-      "base": null,
+      "base": "<p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) validation context.</p>",
       "refs": {
-        "VirtualGatewayListenerTls$validation": null
+        "VirtualGatewayListenerTls$validation": "<p>A reference to an object that represents a virtual gateway's listener's Transport Layer Security (TLS) validation context.</p>"
       }
     },
     "VirtualGatewayListenerTlsValidationContextTrust": {
-      "base": null,
+      "base": "<p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) validation context trust.</p>",
       "refs": {
-        "VirtualGatewayListenerTlsValidationContext$trust": null
+        "VirtualGatewayListenerTlsValidationContext$trust": "<p>A reference to where to retrieve the trust chain when validating a peer’s Transport Layer Security (TLS) certificate.</p>"
       }
     },
     "VirtualGatewayListeners": {
@@ -1778,8 +1940,8 @@
     "VirtualGatewaySdsSecretName": {
       "base": null,
       "refs": {
-        "VirtualGatewayListenerTlsSdsCertificate$secretName": null,
-        "VirtualGatewayTlsValidationContextSdsTrust$secretName": null
+        "VirtualGatewayListenerTlsSdsCertificate$secretName": "<p>A reference to an object that represents the name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.</p>",
+        "VirtualGatewayTlsValidationContextSdsTrust$secretName": "<p>A reference to an object that represents the name of the secret for a virtual gateway's Transport Layer Security (TLS) Secret Discovery Service validation context trust.</p>"
       }
     },
     "VirtualGatewaySpec": {
@@ -1805,33 +1967,33 @@
     "VirtualGatewayTlsValidationContext": {
       "base": "<p>An object that represents a Transport Layer Security (TLS) validation context.</p>",
       "refs": {
-        "VirtualGatewayClientPolicyTls$validation": "<p>A reference to an object that represents a TLS validation context.</p>"
+        "VirtualGatewayClientPolicyTls$validation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context.</p>"
       }
     },
     "VirtualGatewayTlsValidationContextAcmTrust": {
-      "base": "<p>An object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.</p>",
+      "base": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.</p>",
       "refs": {
-        "VirtualGatewayTlsValidationContextTrust$acm": "<p>A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.</p>"
+        "VirtualGatewayTlsValidationContextTrust$acm": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.</p>"
       }
     },
     "VirtualGatewayTlsValidationContextFileTrust": {
       "base": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>",
       "refs": {
-        "VirtualGatewayListenerTlsValidationContextTrust$file": null,
-        "VirtualGatewayTlsValidationContextTrust$file": "<p>An object that represents a TLS validation context trust for a local file.</p>"
+        "VirtualGatewayListenerTlsValidationContextTrust$file": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>",
+        "VirtualGatewayTlsValidationContextTrust$file": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>"
       }
     },
     "VirtualGatewayTlsValidationContextSdsTrust": {
-      "base": null,
+      "base": "<p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service validation context trust. The proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS documentation</a> for more info.</p>",
       "refs": {
-        "VirtualGatewayListenerTlsValidationContextTrust$sds": null,
-        "VirtualGatewayTlsValidationContextTrust$sds": null
+        "VirtualGatewayListenerTlsValidationContextTrust$sds": "<p>A reference to an object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service validation context trust.</p>",
+        "VirtualGatewayTlsValidationContextTrust$sds": "<p>A reference to an object that represents a virtual gateway's Transport Layer Security (TLS) Secret Discovery Service validation context trust.</p>"
       }
     },
     "VirtualGatewayTlsValidationContextTrust": {
       "base": "<p>An object that represents a Transport Layer Security (TLS) validation context trust.</p>",
       "refs": {
-        "VirtualGatewayTlsValidationContext$trust": "<p>A reference to an object that represents a TLS validation context trust.</p>"
+        "VirtualGatewayTlsValidationContext$trust": "<p>A reference to where to retrieve the trust chain when validating a peer’s Transport Layer Security (TLS) certificate.</p>"
       }
     },
     "VirtualNodeConnectionPool": {
