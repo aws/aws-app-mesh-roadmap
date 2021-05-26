@@ -22,10 +22,10 @@ cd aws-sdk-go
 Download the JSON files, replacing the appropriate files in the SDK:
 
 ```bash
-curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/sdk/api.json > models/apis/appmesh/2019-01-25/api-2.json
-curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/sdk/docs.json > models/apis/appmesh/2019-01-25/docs-2.json
-curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/sdk/examples.json > models/apis/appmesh/2019-01-25/examples-1.json
-curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/sdk/paginators.json > models/apis/appmesh/2019-01-25/paginators-1.json
+curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/main/appmesh-preview/sdk/api.json > models/apis/appmesh/2019-01-25/api-2.json
+curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/main/appmesh-preview/sdk/docs.json > models/apis/appmesh/2019-01-25/docs-2.json
+curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/main/appmesh-preview/sdk/examples.json > models/apis/appmesh/2019-01-25/examples-1.json
+curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/main/appmesh-preview/sdk/paginators.json > models/apis/appmesh/2019-01-25/paginators-1.json
 ```
 
 Generate the SDK:
@@ -46,10 +46,10 @@ cd aws-sdk-js
 Download the JSON files, replacing the appropriate files in the SDK:
 
 ```bash
-curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/sdk/api.json > apis/appmesh-2019-01-25.min.json
-curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/sdk/api.normal.json > apis/appmesh-2019-01-25.normal.json
-curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/sdk/examples.json > apis/appmesh-2019-01-25.examples.json
-curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/sdk/paginators.json > apis/appmesh-2019-01-25.paginators.json
+curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/main/appmesh-preview/sdk/api.json > apis/appmesh-2019-01-25.min.json
+curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/main/appmesh-preview/sdk/api.normal.json > apis/appmesh-2019-01-25.normal.json
+curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/main/appmesh-preview/sdk/examples.json > apis/appmesh-2019-01-25.examples.json
+curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/main/appmesh-preview/sdk/paginators.json > apis/appmesh-2019-01-25.paginators.json
 ```
 
 Generate the SDK:
@@ -70,10 +70,10 @@ cd aws-sdk-ruby
 Download the JSON files, replacing the appropriate files in the SDK:
 
 ```bash
-curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/sdk/api.json > apis/appmesh/2019-01-25/api-2.json
-curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/sdk/docs.json > apis/appmesh/2019-01-25/docs-2.json
-curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/sdk/examples.json > apis/appmesh/2019-01-25/examples-1.json
-curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/master/appmesh-preview/sdk/paginators.json > apis/appmesh/2019-01-25/paginators-1.json
+curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/main/appmesh-preview/sdk/api.json > apis/appmesh/2019-01-25/api-2.json
+curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/main/appmesh-preview/sdk/docs.json > apis/appmesh/2019-01-25/docs-2.json
+curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/main/appmesh-preview/sdk/examples.json > apis/appmesh/2019-01-25/examples-1.json
+curl -s https://raw.githubusercontent.com/aws/aws-app-mesh-roadmap/main/appmesh-preview/sdk/paginators.json > apis/appmesh/2019-01-25/paginators-1.json
 ```
 
 Generate the SDK:
