@@ -1528,11 +1528,19 @@
       },
       "payload":"virtualService"
     },
+    "DnsResponseType":{
+      "type":"string",
+      "enum":[
+        "LOADBALANCER",
+        "ENDPOINTS"
+      ]
+    },
     "DnsServiceDiscovery":{
       "type":"structure",
       "required":["hostname"],
       "members":{
-        "hostname":{"shape":"Hostname"}
+        "hostname":{"shape":"Hostname"},
+        "responseType":{"shape":"DnsResponseType"}
       }
     },
     "Duration":{
@@ -1975,7 +1983,7 @@
       "type":"structure",
       "members":{
         "defaultPrefix":{"shape":"DefaultGatewayRouteRewrite"},
-        "prefix":{"shape":"HttpGatewayRoutePrefix"}
+        "value":{"shape":"HttpGatewayRoutePrefix"}
       }
     },
     "HttpGatewayRouteRewrite":{

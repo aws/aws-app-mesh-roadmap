@@ -219,7 +219,7 @@
                     "shape": "LimitExceededException"
                 }
             ],
-            "documentation": "<p>Creates a virtual node within a service mesh.</p> <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS).</p> <p>You define a <code>listener</code> for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a <code>backend</code>.</p> <p>The response metadata for your new virtual node contains the <code>arn</code> that is associated with the virtual node. Set this value to the full ARN; for example, <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>) as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p> <note> <p>By default, App Mesh uses the name of the resource you specified in <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p> <p>AWS Cloud Map is not available in the eu-south-1 Region.</p> </note> <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when setting these variables. For more information about App Mesh Envoy variables, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html\">Envoy image</a> in the AWS App Mesh User Guide.</p>",
+            "documentation": "<p>Creates a virtual node within a service mesh.</p> <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS).</p> <p>You define a <code>listener</code> for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a <code>backend</code>.</p> <p>The response metadata for your new virtual node contains the <code>arn</code> that is associated with the virtual node. Set this value to the full ARN; for example, <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>) as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p> <note> <p>By default, App Mesh uses the name of the resource you specified in <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p> </note> <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html\">Envoy image</a> in the AWS App Mesh User Guide.</p>",
             "idempotent": true
         },
         "CreateVirtualRouter": {
@@ -1390,14 +1390,14 @@
             "members": {
                 "key": {
                     "shape": "AwsCloudMapInstanceAttributeKey",
-                    "documentation": "<p>The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service instance that contains the specified key and value is returned.</p>"
+                    "documentation": "<p>The name of an Cloud Map service instance attribute key. Any Cloud Map service instance that contains the specified key and value is returned.</p>"
                 },
                 "value": {
                     "shape": "AwsCloudMapInstanceAttributeValue",
-                    "documentation": "<p>The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service instance that contains the specified key and value is returned.</p>"
+                    "documentation": "<p>The value of an Cloud Map service instance attribute key. Any Cloud Map service instance that contains the specified key and value is returned.</p>"
                 }
             },
-            "documentation": "<p>An object that represents the AWS Cloud Map attribute information for your virtual node.</p> <note> <p>AWS Cloud Map is not available in the eu-south-1 Region.</p> </note>"
+            "documentation": "<p>An object that represents the Cloud Map attribute information for your virtual node.</p> <note> <p>AWS Cloud Map is not available in the eu-south-1 Region.</p> </note>"
         },
         "AwsCloudMapInstanceAttributeKey": {
             "type": "string",
@@ -1435,14 +1435,14 @@
                 },
                 "namespaceName": {
                     "shape": "AwsCloudMapName",
-                    "documentation": "<p>The name of the AWS Cloud Map namespace to use.</p>"
+                    "documentation": "<p>The name of the Cloud Map namespace to use.</p>"
                 },
                 "serviceName": {
                     "shape": "AwsCloudMapName",
-                    "documentation": "<p>The name of the AWS Cloud Map service to use.</p>"
+                    "documentation": "<p>The name of the Cloud Map service to use.</p>"
                 }
             },
-            "documentation": "<p>An object that represents the AWS Cloud Map service discovery information for your virtual node.</p> <note> <p>AWS Cloud Map is not available in the eu-south-1 Region.</p> </note>"
+            "documentation": "<p>An object that represents the Cloud Map service discovery information for your virtual node.</p> <note> <p>Cloud Map is not available in the eu-south-1 Region.</p> </note>"
         },
         "Backend": {
             "type": "structure",
@@ -2114,7 +2114,7 @@
                     "locationName": "virtualNodeName"
                 }
             },
-            "documentation": "<zonbook></zonbook><xhtml></xhtml>"
+            "documentation": "<p>Deletes a virtual node input.</p>"
         },
         "DeleteVirtualNodeOutput": {
             "type": "structure",
@@ -2511,6 +2511,13 @@
             "documentation": "<zonbook></zonbook><xhtml></xhtml>",
             "payload": "virtualService"
         },
+        "DnsResponseType": {
+            "type": "string",
+            "enum": [
+                "LOADBALANCER",
+                "ENDPOINTS"
+            ]
+        },
         "DnsServiceDiscovery": {
             "type": "structure",
             "required": [
@@ -2520,6 +2527,10 @@
                 "hostname": {
                     "shape": "Hostname",
                     "documentation": "<p>Specifies the DNS service discovery hostname for the virtual node. </p>"
+                },
+                "responseType": {
+                    "shape": "DnsResponseType",
+                    "documentation": "<p>Specifies the DNS response type for the virtual node.</p>"
                 }
             },
             "documentation": "<p>An object that represents the DNS service discovery information for your virtual node.</p>"
@@ -2558,7 +2569,7 @@
             "members": {
                 "type": {
                     "shape": "EgressFilterType",
-                    "documentation": "<p>The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows egress only from virtual nodes to other defined resources in the service mesh (and any traffic to <code>*.amazonaws.com</code> for AWS API calls). You can set the egress filter type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the service mesh.</p>"
+                    "documentation": "<p>The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows egress only from virtual nodes to other defined resources in the service mesh (and any traffic to <code>*.amazonaws.com</code> for Amazon Web Services API calls). You can set the egress filter type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the service mesh.</p>"
                 }
             },
             "documentation": "<p>An object that represents the egress filter rules for a service mesh.</p>"
@@ -2648,23 +2659,29 @@
             "type": "structure",
             "members": {
                 "exact": {
-                    "shape": "ExactHostName"
+                    "shape": "ExactHostName",
+                    "documentation": "<p>The exact host name to match on.</p>"
                 },
                 "suffix": {
-                    "shape": "SuffixHostname"
+                    "shape": "SuffixHostname",
+                    "documentation": "<p>The specified ending characters of the host name to match on.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object representing the gateway route host name to match.</p>"
         },
         "GatewayRouteHostnameRewrite": {
             "type": "structure",
             "members": {
                 "defaultTargetHostname": {
-                    "shape": "DefaultGatewayRouteRewrite"
+                    "shape": "DefaultGatewayRouteRewrite",
+                    "documentation": "<p>The default target host name to write to.</p>"
                 },
                 "targetBased": {
-                    "shape": "GatewayRouteTargetBasedHostnameRewrite"
+                    "shape": "GatewayRouteTargetBasedHostnameRewrite",
+                    "documentation": "<p>The target-based host name to rewrite.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object representing the gateway route host name to rewrite.</p>"
         },
         "GatewayRouteList": {
             "type": "list",
@@ -2747,7 +2764,8 @@
                     "documentation": "<p>An object that represents the specification of an HTTP gateway route.</p>"
                 },
                 "priority": {
-                    "shape": "GatewayRoutePriority"
+                    "shape": "GatewayRoutePriority",
+                    "documentation": "<p>The ordering of the gateway routes spec.</p>"
                 }
             },
             "documentation": "<p>An object that represents a gateway route specification. Specify one gateway route type.</p>"
@@ -2788,7 +2806,8 @@
         },
         "GatewayRouteTargetBasedHostnameRewrite": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "documentation": "<p>An object representing the gateway route target-based host name to rewrite.</p>"
         },
         "GatewayRouteVirtualService": {
             "type": "structure",
@@ -2828,7 +2847,8 @@
             ],
             "members": {
                 "rewrite": {
-                    "shape": "GrpcGatewayRouteRewrite"
+                    "shape": "GrpcGatewayRouteRewrite",
+                    "documentation": "<p>The gateway route action to rewrite.</p>"
                 },
                 "target": {
                     "shape": "GatewayRouteTarget",
@@ -2841,10 +2861,12 @@
             "type": "structure",
             "members": {
                 "hostname": {
-                    "shape": "GatewayRouteHostnameMatch"
+                    "shape": "GatewayRouteHostnameMatch",
+                    "documentation": "<p>The gateway route host name to be matched on.</p>"
                 },
                 "metadata": {
-                    "shape": "GrpcGatewayRouteMetadataList"
+                    "shape": "GrpcGatewayRouteMetadataList",
+                    "documentation": "<p>The gateway route metadata to be matched on.</p>"
                 },
                 "serviceName": {
                     "shape": "ServiceName",
@@ -2860,15 +2882,19 @@
             ],
             "members": {
                 "invert": {
-                    "shape": "Boolean"
+                    "shape": "Boolean",
+                    "documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
                 },
                 "match": {
-                    "shape": "GrpcMetadataMatchMethod"
+                    "shape": "GrpcMetadataMatchMethod",
+                    "documentation": "<p>The criteria for determining a metadata match.</p>"
                 },
                 "name": {
-                    "shape": "HeaderName"
+                    "shape": "HeaderName",
+                    "documentation": "<p>A name for the gateway route metadata.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object representing the metadata of the gateway route.</p>"
         },
         "GrpcGatewayRouteMetadataList": {
             "type": "list",
@@ -2882,29 +2908,36 @@
             "type": "structure",
             "members": {
                 "hostname": {
-                    "shape": "GatewayRouteHostnameRewrite"
+                    "shape": "GatewayRouteHostnameRewrite",
+                    "documentation": "<p>The host name of the gateway route to rewrite.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object that represents the gateway route to rewrite.</p>"
         },
         "GrpcMetadataMatchMethod": {
             "type": "structure",
             "members": {
                 "exact": {
-                    "shape": "HeaderMatch"
+                    "shape": "HeaderMatch",
+                    "documentation": "<p>The exact method header to be matched on.</p>"
                 },
                 "prefix": {
-                    "shape": "HeaderMatch"
+                    "shape": "HeaderMatch",
+                    "documentation": "<p>The specified beginning characters of the method header to be matched on.</p>"
                 },
                 "range": {
                     "shape": "MatchRange"
                 },
                 "regex": {
-                    "shape": "HeaderMatch"
+                    "shape": "HeaderMatch",
+                    "documentation": "<p>The regex used to match the method header.</p>"
                 },
                 "suffix": {
-                    "shape": "HeaderMatch"
+                    "shape": "HeaderMatch",
+                    "documentation": "<p>The specified ending characters of the method header to match on.</p>"
                 }
             },
+            "documentation": "<p>An object representing the method header to be matched.</p>",
             "union": true
         },
         "GrpcRetryPolicy": {
@@ -3205,7 +3238,8 @@
             ],
             "members": {
                 "rewrite": {
-                    "shape": "HttpGatewayRouteRewrite"
+                    "shape": "HttpGatewayRouteRewrite",
+                    "documentation": "<p>The gateway route action to rewrite.</p>"
                 },
                 "target": {
                     "shape": "GatewayRouteTarget",
@@ -3221,15 +3255,18 @@
             ],
             "members": {
                 "invert": {
-                    "shape": "Boolean"
+                    "shape": "Boolean",
+                    "documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
                 },
                 "match": {
                     "shape": "HeaderMatchMethod"
                 },
                 "name": {
-                    "shape": "HeaderName"
+                    "shape": "HeaderName",
+                    "documentation": "<p>A name for the HTTP header in the gateway route that will be matched on.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object that represents the HTTP header in the gateway route.</p>"
         },
         "HttpGatewayRouteHeaders": {
             "type": "list",
@@ -3243,23 +3280,28 @@
             "type": "structure",
             "members": {
                 "headers": {
-                    "shape": "HttpGatewayRouteHeaders"
+                    "shape": "HttpGatewayRouteHeaders",
+                    "documentation": "<p>The client request headers to match on.</p>"
                 },
                 "hostname": {
-                    "shape": "GatewayRouteHostnameMatch"
+                    "shape": "GatewayRouteHostnameMatch",
+                    "documentation": "<p>The host name to match on.</p>"
                 },
                 "method": {
-                    "shape": "HttpMethod"
+                    "shape": "HttpMethod",
+                    "documentation": "<p>The method to match on.</p>"
                 },
                 "path": {
-                    "shape": "HttpPathMatch"
+                    "shape": "HttpPathMatch",
+                    "documentation": "<p>The path to match on.</p>"
                 },
                 "prefix": {
                     "shape": "String",
                     "documentation": "<p>Specifies the path to match requests with. This parameter must always start with <code>/</code>, which by itself matches all requests to the virtual service name. You can also match for path-based routing of requests. For example, if your virtual service name is <code>my-service.local</code> and you want the route to match requests to <code>my-service.local/metrics</code>, your prefix should be <code>/metrics</code>.</p>"
                 },
                 "queryParameters": {
-                    "shape": "HttpQueryParameters"
+                    "shape": "HttpQueryParameters",
+                    "documentation": "<p>The query parameter to match on.</p>"
                 }
             },
             "documentation": "<p>An object that represents the criteria for determining a request match.</p>"
@@ -3268,9 +3310,11 @@
             "type": "structure",
             "members": {
                 "exact": {
-                    "shape": "HttpPathExact"
+                    "shape": "HttpPathExact",
+                    "documentation": "<p>The exact path to rewrite.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object that represents the path to rewrite.</p>"
         },
         "HttpGatewayRoutePrefix": {
             "type": "string",
@@ -3281,26 +3325,33 @@
             "type": "structure",
             "members": {
                 "defaultPrefix": {
-                    "shape": "DefaultGatewayRouteRewrite"
+                    "shape": "DefaultGatewayRouteRewrite",
+                    "documentation": "<p>The default prefix used to replace the incoming route prefix when rewritten.</p>"
                 },
-                "prefix": {
-                    "shape": "HttpGatewayRoutePrefix"
+                "value": {
+                    "shape": "HttpGatewayRoutePrefix",
+                    "documentation": "<p>The value used to replace the incoming route prefix when rewritten.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object representing the beginning characters of the route to rewrite.</p>"
         },
         "HttpGatewayRouteRewrite": {
             "type": "structure",
             "members": {
                 "hostname": {
-                    "shape": "GatewayRouteHostnameRewrite"
+                    "shape": "GatewayRouteHostnameRewrite",
+                    "documentation": "<p>The host name to rewrite.</p>"
                 },
                 "path": {
-                    "shape": "HttpGatewayRoutePathRewrite"
+                    "shape": "HttpGatewayRoutePathRewrite",
+                    "documentation": "<p>The path to rewrite.</p>"
                 },
                 "prefix": {
-                    "shape": "HttpGatewayRoutePrefixRewrite"
+                    "shape": "HttpGatewayRoutePrefixRewrite",
+                    "documentation": "<p>The specified beginning characters to rewrite.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object representing the gateway route to rewrite.</p>"
         },
         "HttpMethod": {
             "type": "string",
@@ -3325,12 +3376,15 @@
             "type": "structure",
             "members": {
                 "exact": {
-                    "shape": "HttpPathExact"
+                    "shape": "HttpPathExact",
+                    "documentation": "<p>The exact path to match on.</p>"
                 },
                 "regex": {
-                    "shape": "HttpPathRegex"
+                    "shape": "HttpPathRegex",
+                    "documentation": "<p>The regex used to match the path.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object representing the path to match in the request.</p>"
         },
         "HttpPathRegex": {
             "type": "string",
@@ -3344,12 +3398,15 @@
             ],
             "members": {
                 "match": {
-                    "shape": "QueryParameterMatch"
+                    "shape": "QueryParameterMatch",
+                    "documentation": "<p>The query parameter to match on.</p>"
                 },
                 "name": {
-                    "shape": "QueryParameterName"
+                    "shape": "QueryParameterName",
+                    "documentation": "<p>A name for the query parameter that will be matched on.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object that represents the query parameter in the request.</p>"
         },
         "HttpQueryParameters": {
             "type": "list",
@@ -3471,25 +3528,27 @@
             "members": {
                 "headers": {
                     "shape": "HttpRouteHeaders",
-                    "documentation": "<p>An object that represents the client request headers to match on.</p>"
+                    "documentation": "<p>The client request headers to match on.</p>"
                 },
                 "method": {
                     "shape": "HttpMethod",
                     "documentation": "<p>The client request method to match on. Specify only one.</p>"
                 },
                 "path": {
-                    "shape": "HttpPathMatch"
+                    "shape": "HttpPathMatch",
+                    "documentation": "<p>The client request path to match on.</p>"
                 },
                 "prefix": {
                     "shape": "String",
                     "documentation": "<p>Specifies the path to match requests with. This parameter must always start with <code>/</code>, which by itself matches all requests to the virtual service name. You can also match for path-based routing of requests. For example, if your virtual service name is <code>my-service.local</code> and you want the route to match requests to <code>my-service.local/metrics</code>, your prefix should be <code>/metrics</code>.</p>"
                 },
                 "queryParameters": {
-                    "shape": "HttpQueryParameters"
+                    "shape": "HttpQueryParameters",
+                    "documentation": "<p>The client request query parameters to match on.</p>"
                 },
                 "scheme": {
                     "shape": "HttpScheme",
-                    "documentation": "<p>The client request scheme to match on. Specify only one.</p>"
+                    "documentation": "<p>The client request scheme to match on. Specify only one. Applicable only for HTTP2 routes.</p>"
                 }
             },
             "documentation": "<p>An object that represents the requirements for a route to match HTTP requests for a virtual router.</p>"
@@ -3970,7 +4029,8 @@
             "type": "structure",
             "members": {
                 "grpc": {
-                    "shape": "GrpcTimeout"
+                    "shape": "GrpcTimeout",
+                    "documentation": "<p>An object that represents types of timeouts. </p>"
                 },
                 "http": {
                     "shape": "HttpTimeout",
@@ -4380,9 +4440,11 @@
             "type": "structure",
             "members": {
                 "exact": {
-                    "shape": "String"
+                    "shape": "String",
+                    "documentation": "<p>The exact query parameter to match on.</p>"
                 }
-            }
+            },
+            "documentation": "<p>An object representing the query parameter to match.</p>"
         },
         "QueryParameterName": {
             "type": "string"
@@ -4607,7 +4669,7 @@
             "members": {
                 "awsCloudMap": {
                     "shape": "AwsCloudMapServiceDiscovery",
-                    "documentation": "<p>Specifies any AWS Cloud Map information for the virtual node.</p>"
+                    "documentation": "<p>Specifies any Cloud Map information for the virtual node.</p>"
                 },
                 "dns": {
                     "shape": "DnsServiceDiscovery",
@@ -4803,7 +4865,7 @@
                     "documentation": "<p>One or more ACM Amazon Resource Name (ARN)s.</p>"
                 }
             },
-            "documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.</p>"
+            "documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.</p>"
         },
         "TlsValidationContextFileTrust": {
             "type": "structure",
@@ -4836,7 +4898,7 @@
             "members": {
                 "acm": {
                     "shape": "TlsValidationContextAcmTrust",
-                    "documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.</p>"
+                    "documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.</p>"
                 },
                 "file": {
                     "shape": "TlsValidationContextFileTrust",
@@ -5536,14 +5598,14 @@
                     "documentation": "<p>The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>"
                 }
             },
-            "documentation": "<p>An object that represents an AWS Certicate Manager (ACM) certificate.</p>"
+            "documentation": "<p>An object that represents an Certificate Manager certificate.</p>"
         },
         "VirtualGatewayListenerTlsCertificate": {
             "type": "structure",
             "members": {
                 "acm": {
                     "shape": "VirtualGatewayListenerTlsAcmCertificate",
-                    "documentation": "<p>A reference to an object that represents an AWS Certicate Manager (ACM) certificate.</p>"
+                    "documentation": "<p>A reference to an object that represents an Certificate Manager certificate.</p>"
                 },
                 "file": {
                     "shape": "VirtualGatewayListenerTlsFileCertificate",
@@ -5792,7 +5854,7 @@
                     "documentation": "<p>One or more ACM Amazon Resource Name (ARN)s.</p>"
                 }
             },
-            "documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.</p>"
+            "documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.</p>"
         },
         "VirtualGatewayTlsValidationContextFileTrust": {
             "type": "structure",
@@ -5825,7 +5887,7 @@
             "members": {
                 "acm": {
                     "shape": "VirtualGatewayTlsValidationContextAcmTrust",
-                    "documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.</p>"
+                    "documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.</p>"
                 },
                 "file": {
                     "shape": "VirtualGatewayTlsValidationContextFileTrust",
@@ -6393,5 +6455,5 @@
             "min": 1
         }
     },
-    "documentation": "<p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and control microservices. App Mesh standardizes how your microservices communicate, giving you end-to-end visibility and helping to ensure high availability for your applications.</p> <p>App Mesh gives you consistent visibility and network traffic controls for every microservice in an application. You can use App Mesh with AWS Fargate, Amazon ECS, Amazon EKS, Kubernetes on AWS, and Amazon EC2.</p> <note> <p>App Mesh supports microservice applications that use service discovery naming for their components. For more information about service discovery on Amazon ECS, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes <code>kube-dns</code> and <code>coredns</code> are supported. For more information, see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS for Services and Pods</a> in the Kubernetes documentation.</p> </note>"
+    "documentation": "<p>App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and control microservices. App Mesh standardizes how your microservices communicate, giving you end-to-end visibility and helping to ensure high availability for your applications.</p> <p>App Mesh gives you consistent visibility and network traffic controls for every microservice in an application. You can use App Mesh with Amazon Web Services Fargate, Amazon ECS, Amazon EKS, Kubernetes on Amazon Web Services, and Amazon EC2.</p> <note> <p>App Mesh supports microservice applications that use service discovery naming for their components. For more information about service discovery on Amazon ECS, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes <code>kube-dns</code> and <code>coredns</code> are supported. For more information, see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS for Services and Pods</a> in the Kubernetes documentation.</p> </note>"
 }
