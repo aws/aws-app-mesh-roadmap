@@ -4190,9 +4190,7 @@
             "type": "list",
             "member": {
                 "shape": "Listener"
-            },
-            "max": 1,
-            "min": 0
+            }
         },
         "Logging": {
             "type": "structure",
@@ -5718,9 +5716,7 @@
             "type": "list",
             "member": {
                 "shape": "VirtualGatewayListener"
-            },
-            "max": 1,
-            "min": 0
+            }
         },
         "VirtualGatewayLogging": {
             "type": "structure",
@@ -6207,9 +6203,7 @@
             "type": "list",
             "member": {
                 "shape": "VirtualRouterListener"
-            },
-            "max": 1,
-            "min": 1
+            }
         },
         "VirtualRouterRef": {
             "type": "structure",

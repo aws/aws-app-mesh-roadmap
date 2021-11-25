@@ -3396,9 +3396,7 @@
     },
     "Listeners":{
       "type":"list",
-      "member":{"shape":"Listener"},
-      "max":1,
-      "min":0
+      "member":{"shape":"Listener"}
     },
     "Logging":{
       "type":"structure",
@@ -4820,9 +4818,7 @@
     },
     "VirtualGatewayListeners":{
       "type":"list",
-      "member":{"shape":"VirtualGatewayListener"},
-      "max":1,
-      "min":0
+      "member":{"shape":"VirtualGatewayListener"}
     },
     "VirtualGatewayLogging":{
       "type":"structure",
@@ -5271,9 +5267,7 @@
     },
     "VirtualRouterListeners":{
       "type":"list",
-      "member":{"shape":"VirtualRouterListener"},
-      "max":1,
-      "min":1
+      "member":{"shape":"VirtualRouterListener"}
     },
     "VirtualRouterRef":{
       "type":"structure",
