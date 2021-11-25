@@ -1633,8 +1633,7 @@
     "GatewayRouteHostnameRewrite":{
       "type":"structure",
       "members":{
-        "defaultTargetHostname":{"shape":"DefaultGatewayRouteRewrite"},
-        "targetBased":{"shape":"GatewayRouteTargetBasedHostnameRewrite"}
+        "defaultTargetHostname":{"shape":"DefaultGatewayRouteRewrite"}
       }
     },
     "GatewayRouteList":{
@@ -1700,12 +1699,8 @@
       "type":"structure",
       "required":["virtualService"],
       "members":{
+        "port":{"shape":"ListenerPort"},
         "virtualService":{"shape":"GatewayRouteVirtualService"}
-      }
-    },
-    "GatewayRouteTargetBasedHostnameRewrite":{
-      "type":"structure",
-      "members":{
       }
     },
     "GatewayRouteVirtualService":{
@@ -1739,6 +1734,7 @@
       "members":{
         "hostname":{"shape":"GatewayRouteHostnameMatch"},
         "metadata":{"shape":"GrpcGatewayRouteMetadataList"},
+        "port":{"shape":"ListenerPort"},
         "serviceName":{"shape":"ServiceName"}
       }
     },
@@ -1829,6 +1825,7 @@
       "members":{
         "metadata":{"shape":"GrpcRouteMetadataList"},
         "methodName":{"shape":"MethodName"},
+        "port":{"shape":"ListenerPort"},
         "serviceName":{"shape":"ServiceName"}
       }
     },
@@ -1964,6 +1961,7 @@
         "hostname":{"shape":"GatewayRouteHostnameMatch"},
         "method":{"shape":"HttpMethod"},
         "path":{"shape":"HttpPathMatch"},
+        "port":{"shape":"ListenerPort"},
         "prefix":{"shape":"String"},
         "queryParameters":{"shape":"HttpQueryParameters"}
       }
@@ -2104,6 +2102,7 @@
         "headers":{"shape":"HttpRouteHeaders"},
         "method":{"shape":"HttpMethod"},
         "path":{"shape":"HttpPathMatch"},
+        "port":{"shape":"ListenerPort"},
         "prefix":{"shape":"String"},
         "queryParameters":{"shape":"HttpQueryParameters"},
         "scheme":{"shape":"HttpScheme"}
@@ -2440,6 +2439,12 @@
         "timeout":{"shape":"ListenerTimeout"},
         "tls":{"shape":"ListenerTls"}
       }
+    },
+    "ListenerPort":{
+      "type":"integer",
+      "box":true,
+      "max":65535,
+      "min":1
     },
     "ListenerTimeout":{
       "type":"structure",
@@ -2915,6 +2920,7 @@
       "required":["action"],
       "members":{
         "action":{"shape":"TcpRouteAction"},
+        "match":{"shape":"TcpRouteMatch"},
         "timeout":{"shape":"TcpTimeout"}
       }
     },
@@ -2923,6 +2929,12 @@
       "required":["weightedTargets"],
       "members":{
         "weightedTargets":{"shape":"WeightedTargets"}
+      }
+    },
+    "TcpRouteMatch":{
+      "type":"structure",
+      "members":{
+        "port":{"shape":"ListenerPort"}
       }
     },
     "TcpTimeout":{
@@ -3878,6 +3890,7 @@
         "weight"
       ],
       "members":{
+        "port":{"shape":"ListenerPort"},
         "virtualNode":{"shape":"ResourceName"},
         "weight":{"shape":"PercentInt"}
       }
